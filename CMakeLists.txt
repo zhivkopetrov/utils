@@ -1,15 +1,14 @@
 #author Zhivko Petrov
 
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.10.2)
 
 include(cmake_modules/helpers.cmake)
 
 project(utils)
 
-set(_UTILS_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
-set(_UTILS_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set(_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
             
-#Generate the static library from the sources
 add_library(
     ${PROJECT_NAME} 
     STATIC
@@ -17,24 +16,24 @@ add_library(
 )
 
 target_sources(${PROJECT_NAME} PUBLIC
-    "${_UTILS_SRC_DIR}/common/CircularBuffer.cpp"
-    "${_UTILS_SRC_DIR}/common/Crc.cpp"
-    "${_UTILS_SRC_DIR}/common/Position.cpp"
-    "${_UTILS_SRC_DIR}/common/ResourceFileHeader.cpp"
-    "${_UTILS_SRC_DIR}/datatype/FloatingPointUtils.cpp"
-    "${_UTILS_SRC_DIR}/datatype/IntegerUtils.cpp"
-    "${_UTILS_SRC_DIR}/datatype/StringUtils.cpp"
-    "${_UTILS_SRC_DIR}/debug/SignalHandler.cpp"
-    "${_UTILS_SRC_DIR}/drawing/Color.cpp"
-    "${_UTILS_SRC_DIR}/drawing/Margins.cpp"
-    "${_UTILS_SRC_DIR}/drawing/Point.cpp"
-    "${_UTILS_SRC_DIR}/drawing/Rectangle.cpp"
-    "${_UTILS_SRC_DIR}/drawing/Sprite.cpp"
-    "${_UTILS_SRC_DIR}/drawing/WidgetAligner.cpp"
-    "${_UTILS_SRC_DIR}/resourceloader/ResourceLoader.cpp"
-    "${_UTILS_SRC_DIR}/rng/RNG.cpp"
-    "${_UTILS_SRC_DIR}/sound/CommonSoundDefines.cpp"
-    "${_UTILS_SRC_DIR}/time/Time.cpp"
+    "${_SRC_DIR}/common/CircularBuffer.cpp"
+    "${_SRC_DIR}/common/Crc.cpp"
+    "${_SRC_DIR}/common/Position.cpp"
+    "${_SRC_DIR}/common/ResourceFileHeader.cpp"
+    "${_SRC_DIR}/datatype/FloatingPointUtils.cpp"
+    "${_SRC_DIR}/datatype/IntegerUtils.cpp"
+    "${_SRC_DIR}/datatype/StringUtils.cpp"
+    "${_SRC_DIR}/debug/SignalHandler.cpp"
+    "${_SRC_DIR}/drawing/Color.cpp"
+    "${_SRC_DIR}/drawing/Margins.cpp"
+    "${_SRC_DIR}/drawing/Point.cpp"
+    "${_SRC_DIR}/drawing/Rectangle.cpp"
+    "${_SRC_DIR}/drawing/Sprite.cpp"
+    "${_SRC_DIR}/drawing/WidgetAligner.cpp"
+    "${_SRC_DIR}/resourceloader/ResourceLoader.cpp"
+    "${_SRC_DIR}/rng/RNG.cpp"
+    "${_SRC_DIR}/sound/CommonSoundDefines.cpp"
+    "${_SRC_DIR}/time/Time.cpp"
 )
 
 set_target_cpp_standard(${PROJECT_NAME} 17)
