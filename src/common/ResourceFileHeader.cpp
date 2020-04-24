@@ -1,5 +1,5 @@
 // Corresponding header
-#include "common/ResourceFileHeader.h"
+#include "utils/include/common/ResourceFileHeader.h"
 
 // C system headers
 
@@ -8,7 +8,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "LimitValues.hpp"
+#include "utils/include/LimitValues.hpp"
 
 std::string ResourceFileHeader::getEngineResHeader() {
   return "# This file is auto-generated. Do not modify it. \n\n"

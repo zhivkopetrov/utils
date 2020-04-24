@@ -1,5 +1,5 @@
 // Corresponding header
-#include "debug/SignalHandler.h"
+#include "utils/include/debug/SignalHandler.h"
 
 // C system headers
 
@@ -8,8 +8,8 @@
 // Other libraries headers
 
 // Own components headers
-#include "debug/StackTrace.hpp"
-#include "Log.h"
+#include "utils/include/debug/StackTrace.hpp"
+#include "utils/include/Log.h"
 
 void SignalHandler::installSignal(const int32_t signalNumber) {
   switch (signalNumber) {

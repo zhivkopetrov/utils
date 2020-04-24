@@ -14,7 +14,6 @@
 class ResourceFileHeader {
  public:
   ResourceFileHeader() = delete;
-  ~ResourceFileHeader() = delete;
 
   /** @brief used to fill the beginning of the Engine resource file
    *

@@ -15,7 +15,6 @@
 class IntegerUtils {
  public:
   IntegerUtils() = delete;
-  ~IntegerUtils() = delete;
 
   /**
    * @brief the function returns the count of all digits in

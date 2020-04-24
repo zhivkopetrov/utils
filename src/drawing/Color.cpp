@@ -1,5 +1,5 @@
 // Corresponding header
-#include "drawing/Color.h"
+#include "utils/include/drawing/Color.h"
 
 // C system headers
 

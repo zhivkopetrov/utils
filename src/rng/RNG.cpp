@@ -1,10 +1,5 @@
-/**
- * RNG.cpp
- * class RNG - Implementation
- */
-
 // Corresponding header
-#include "rng/RNG.h"
+#include "utils/include/rng/RNG.h"
 
 // C system headers
 

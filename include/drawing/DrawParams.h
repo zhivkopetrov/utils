@@ -9,8 +9,8 @@
 // Other libraries headers
 
 // Own components headers
-#include "Point.h"
-#include "Rectangle.h"
+#include "utils/include/drawing/Point.h"
+#include "utils/include/drawing/Rectangle.h"
 
 enum class WidgetType : uint8_t {
   IMAGE = 0,

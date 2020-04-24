@@ -15,7 +15,6 @@
 class StringUtils {
  public:
   StringUtils() = delete;
-  ~StringUtils() = delete;
 
   /** @brief used to safely extract precise number of integer values
    *         from string a given string.

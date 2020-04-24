@@ -9,9 +9,9 @@
 // Other libraries headers
 
 // Own components headers
-#include "CommonSoundDefines.h"
+#include "utils/include/sound/CommonSoundDefines.h"
 
-#include "common/CommonStructs.h"
+#include "utils/include/common/CommonStructs.h"
 
 // Sound specific data
 struct SoundData {

@@ -10,7 +10,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Rectangle.h"
+#include "utils/include/drawing/Rectangle.h"
 
 class Sprite {
  public:

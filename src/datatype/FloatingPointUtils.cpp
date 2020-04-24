@@ -1,5 +1,5 @@
 // Corresponding header
-#include "datatype/FloatingPointUtils.h"
+#include "utils/include/datatype/FloatingPointUtils.h"
 
 // C system headers
 
@@ -8,7 +8,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "datatype/FloatingPoint.h"
+#include "utils/include/datatype/FloatingPoint.h"
 
 float FloatingPointUtils::kahanSummation(float* begin, const uint64_t SIZE) {
   // Beware overly-aggressive compiler optimisations!

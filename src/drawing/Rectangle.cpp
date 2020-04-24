@@ -1,5 +1,5 @@
 // Corresponding header
-#include "drawing/Rectangle.h"
+#include "utils/include/drawing/Rectangle.h"
 
 // C system headers
 

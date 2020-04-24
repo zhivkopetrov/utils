@@ -14,7 +14,6 @@
 class SignalHandler {
  public:
   SignalHandler() = delete;
-  ~SignalHandler() = delete;
 
   /** @brief used to install a specific system signal to hander() callback
    * */

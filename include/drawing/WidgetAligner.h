@@ -8,8 +8,8 @@
 // Other libraries headers
 
 // Own components headers
-#include "Margins.h"
-#include "Point.h"
+#include "utils/include/drawing/Margins.h"
+#include "utils/include/drawing/Point.h"
 
 // Forward declarations
 class Widget;

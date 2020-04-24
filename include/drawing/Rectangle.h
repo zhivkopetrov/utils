@@ -9,7 +9,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Point.h"
+#include "utils/include/drawing/Point.h"
 
 // Forward declarations
 

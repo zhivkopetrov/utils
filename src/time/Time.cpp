@@ -1,5 +1,5 @@
 // Corresponding header
-#include "time/Time.h"
+#include "utils/include/time/Time.h"
 
 // C system headers
 
@@ -11,7 +11,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Log.h"
+#include "utils/include/Log.h"
 
 Time::Time() {
   if (EXIT_SUCCESS != clock_gettime(CLOCK_MONOTONIC, &_startTime)) {

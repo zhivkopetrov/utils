@@ -1,5 +1,5 @@
 // Corresponding header
-#include "common/CircularBuffer.h"
+#include "utils/include/common/CircularBuffer.h"
 
 // C system headers
 
@@ -11,7 +11,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Log.h"
+#include "utils/include/Log.h"
 
 // default constructor
 CircularBuffer::CircularBuffer()

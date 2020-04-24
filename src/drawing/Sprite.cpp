@@ -1,5 +1,5 @@
 // Corresponding header
-#include "drawing/Sprite.h"
+#include "utils/include/drawing/Sprite.h"
 
 // C system headers
 
@@ -8,7 +8,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Log.h"
+#include "utils/include/Log.h"
 
 Sprite::Sprite() : _currFrame(0), _maxFrames(0), _rsrcId(0) {}
 

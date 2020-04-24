@@ -1,5 +1,5 @@
 // Corresponding header
-#include "drawing/WidgetAligner.h"
+#include "utils/include/drawing/WidgetAligner.h"
 
 // C system headers
 
@@ -9,9 +9,9 @@
 // Other libraries headers
 
 // Own components headers
-#include "drawing/Rectangle.h"
-#include "LimitValues.hpp"
-#include "Log.h"
+#include "utils/include/drawing/Rectangle.h"
+#include "utils/include/LimitValues.hpp"
+#include "utils/include/Log.h"
 
 Point WidgetAligner::getPosition(const int32_t widgetWidth,
                                  const int32_t widgetHeight,

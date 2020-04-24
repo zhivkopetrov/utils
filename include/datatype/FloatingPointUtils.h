@@ -13,7 +13,6 @@
 class FloatingPointUtils {
  public:
   FloatingPointUtils() = delete;
-  ~FloatingPointUtils() = delete;
 
   //===================== START KAHAN SUMMATION ==========================
 

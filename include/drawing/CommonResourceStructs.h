@@ -11,8 +11,8 @@
 // Other libraries headers
 
 // Own components headers
-#include "common/CommonStructs.h"
-#include "Rectangle.h"
+#include "utils/include/common/CommonStructs.h"
+#include "utils/include/drawing/Rectangle.h"
 
 // Resource specific data
 struct ResourceData {

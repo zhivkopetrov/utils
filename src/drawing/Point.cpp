@@ -1,5 +1,5 @@
 // Corresponding header
-#include "drawing/Point.h"
+#include "utils/include/drawing/Point.h"
 
 // C system headers
 

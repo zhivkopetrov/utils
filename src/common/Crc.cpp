@@ -50,7 +50,7 @@
  */
 
 // Corresponding header
-#include "common/Crc.h"
+#include "utils/include/common/Crc.h"
 
 // C system headers
 

@@ -50,9 +50,7 @@ set_target_properties(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_SOURCE_DIR}
-    PRIVATE
-        ${_UTILS_INCLUDE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
 #invoke include-what-you-use (if it's enabled) for the current project

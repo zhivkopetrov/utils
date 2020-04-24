@@ -1,5 +1,5 @@
 // Corresponding header
-#include "common/Position.h"
+#include "utils/include/common/Position.h"
 
 // C system headers
 
@@ -8,8 +8,8 @@
 // Other libraries headers
 
 // Own components headers
-#include "drawing/Point.h"
-#include "drawing/Rectangle.h"
+#include "utils/include/drawing/Point.h"
+#include "utils/include/drawing/Rectangle.h"
 
 Point Position::getCentral(const Rectangle& rec, const int32_t width,
                            const int32_t height) {

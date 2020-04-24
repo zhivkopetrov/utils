@@ -11,7 +11,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "drawing/Rectangle.h"
+#include "utils/include/drawing/Rectangle.h"
 
 // Common header for resources/fonts/sounds specific data
 struct DataHeader {

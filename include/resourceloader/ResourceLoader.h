@@ -11,7 +11,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "common/defines/ResourceDefines.h"
+#include "utils/include/common/defines/ResourceDefines.h"
 
 // Forward declarations
 struct ResourceData;

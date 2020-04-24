@@ -1,5 +1,5 @@
 // Corresponding header
-#include "datatype/StringUtils.h"
+#include "utils/include/datatype/StringUtils.h"
 
 // C system headers
 
@@ -11,7 +11,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "Log.h"
+#include "utils/include/Log.h"
 
 int32_t StringUtils::extractIntsFromString(const std::string& data,
                                            const std::string& delimiters,

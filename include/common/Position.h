@@ -17,7 +17,6 @@ class Point;
 class Position {
  public:
   Position() = delete;
-  ~Position() = delete;
 
   /** @brief Use to draw image/text in center of rectangle
    *

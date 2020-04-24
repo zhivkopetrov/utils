@@ -1,5 +1,5 @@
 // Corresponding header
-#include "resourceloader/ResourceLoader.h"
+#include "utils/include/resourceloader/ResourceLoader.h"
 
 // C system headers
 
@@ -10,12 +10,12 @@
 // Other libraries headers
 
 // Own components headers
-#include "common/CommonStructs.h"
-#include "common/ResourceFileHeader.h"
-#include "datatype/StringUtils.h"
-#include "drawing/CommonResourceStructs.h"
-#include "sound/CommonSoundStructs.h"
-#include "Log.h"
+#include "utils/include/common/CommonStructs.h"
+#include "utils/include/common/ResourceFileHeader.h"
+#include "utils/include/datatype/StringUtils.h"
+#include "utils/include/drawing/CommonResourceStructs.h"
+#include "utils/include/sound/CommonSoundStructs.h"
+#include "utils/include/Log.h"
 
 ResourceLoader::ResourceLoader(const std::string& projectName)
     : _RESOURCES_BIN_NAME("resources.bin"),
