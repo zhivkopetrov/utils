@@ -5,9 +5,6 @@ cmake_minimum_required(VERSION 3.10.2)
 include(cmake_modules/helpers.cmake)
 
 project(utils)
-
-set(_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
-set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
             
 add_library(
     ${PROJECT_NAME} 
@@ -15,11 +12,12 @@ add_library(
         ""
 )
 
+set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/utils")
+
 target_sources(${PROJECT_NAME} PUBLIC
     "${_SRC_DIR}/common/CircularBuffer.cpp"
     "${_SRC_DIR}/common/Crc.cpp"
     "${_SRC_DIR}/common/Position.cpp"
-    "${_SRC_DIR}/common/ResourceFileHeader.cpp"
     "${_SRC_DIR}/datatype/FloatingPointUtils.cpp"
     "${_SRC_DIR}/datatype/IntegerUtils.cpp"
     "${_SRC_DIR}/datatype/StringUtils.cpp"
@@ -30,9 +28,7 @@ target_sources(${PROJECT_NAME} PUBLIC
     "${_SRC_DIR}/drawing/Rectangle.cpp"
     "${_SRC_DIR}/drawing/Sprite.cpp"
     "${_SRC_DIR}/drawing/WidgetAligner.cpp"
-    "${_SRC_DIR}/resourceloader/ResourceLoader.cpp"
     "${_SRC_DIR}/rng/RNG.cpp"
-    "${_SRC_DIR}/sound/CommonSoundDefines.cpp"
     "${_SRC_DIR}/time/Time.cpp"
 )
 
@@ -49,7 +45,7 @@ set_target_properties(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/..
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 #invoke include-what-you-use (if it's enabled) for the current project
