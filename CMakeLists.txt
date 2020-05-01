@@ -2,34 +2,37 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 
-include(cmake_modules/helpers.cmake)
+if(TARGET utils)
+  return()
+endif()
+
+include(cmake_helpers/helpers.cmake)
+
+set(CMAKE_MODULE_PATH 
+    ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/find_modules)
 
 project(utils)
             
+set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/utils")
+
 add_library(
     ${PROJECT_NAME} 
     STATIC
-        ""
-)
-
-set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/utils")
-
-target_sources(${PROJECT_NAME} PUBLIC
-    "${_SRC_DIR}/common/CircularBuffer.cpp"
-    "${_SRC_DIR}/common/Crc.cpp"
-    "${_SRC_DIR}/common/Position.cpp"
-    "${_SRC_DIR}/datatype/FloatingPointUtils.cpp"
-    "${_SRC_DIR}/datatype/IntegerUtils.cpp"
-    "${_SRC_DIR}/datatype/StringUtils.cpp"
-    "${_SRC_DIR}/debug/SignalHandler.cpp"
-    "${_SRC_DIR}/drawing/Color.cpp"
-    "${_SRC_DIR}/drawing/Margins.cpp"
-    "${_SRC_DIR}/drawing/Point.cpp"
-    "${_SRC_DIR}/drawing/Rectangle.cpp"
-    "${_SRC_DIR}/drawing/Sprite.cpp"
-    "${_SRC_DIR}/drawing/WidgetAligner.cpp"
-    "${_SRC_DIR}/rng/RNG.cpp"
-    "${_SRC_DIR}/time/Time.cpp"
+        "${_SRC_DIR}/common/CircularBuffer.cpp"
+        "${_SRC_DIR}/common/Crc.cpp"
+        "${_SRC_DIR}/common/Position.cpp"
+        "${_SRC_DIR}/datatype/FloatingPointUtils.cpp"
+        "${_SRC_DIR}/datatype/IntegerUtils.cpp"
+        "${_SRC_DIR}/datatype/StringUtils.cpp"
+        "${_SRC_DIR}/debug/SignalHandler.cpp"
+        "${_SRC_DIR}/drawing/Color.cpp"
+        "${_SRC_DIR}/drawing/Margins.cpp"
+        "${_SRC_DIR}/drawing/Point.cpp"
+        "${_SRC_DIR}/drawing/Rectangle.cpp"
+        "${_SRC_DIR}/drawing/Sprite.cpp"
+        "${_SRC_DIR}/drawing/WidgetAligner.cpp"
+        "${_SRC_DIR}/rng/RNG.cpp"
+        "${_SRC_DIR}/time/Time.cpp"
 )
 
 set_target_cpp_standard(${PROJECT_NAME} 17)
