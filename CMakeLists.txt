@@ -6,7 +6,7 @@ if(TARGET utils)
   return()
 endif()
 
-include(cmake_helpers/helpers.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/helpers.cmake)
 
 set(CMAKE_MODULE_PATH 
     ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/find_modules)
