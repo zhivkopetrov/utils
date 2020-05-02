@@ -1,3 +1,6 @@
+#ifndef UTILS_FUNCTIONTRACER_HPP_
+#define UTILS_FUNCTIONTRACER_HPP_
+
 /*
  * FunctionTracer.hpp
  * Generic class for tracing the function calls
@@ -16,9 +19,6 @@
  *     //your source
  * }
  */
-
-#ifndef UTILS_FUNCTIONTRACER_HPP_
-#define UTILS_FUNCTIONTRACER_HPP_
 
 #if defined(DEEP_TRACING_ENABLED)
 // C system headers
