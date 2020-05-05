@@ -26,7 +26,6 @@ add_library(
         "${_SRC_DIR}/drawing/Margins.cpp"
         "${_SRC_DIR}/drawing/Point.cpp"
         "${_SRC_DIR}/drawing/Rectangle.cpp"
-        "${_SRC_DIR}/drawing/Sprite.cpp"
         "${_SRC_DIR}/drawing/WidgetAligner.cpp"
         "${_SRC_DIR}/rng/RNG.cpp"
         "${_SRC_DIR}/time/Time.cpp"
