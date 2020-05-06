@@ -76,7 +76,7 @@ struct Rectangle {
    *
    *  @returns bool            - is point inside or not
    * */
-  inline bool isPointInRect(const Point& point) {
+  inline bool isPointInRect(const Point& point) const {
     return (point.x >= x) && (point.x < (x + w)) && (point.y >= y) &&
            (point.y < (y + h));
   }
