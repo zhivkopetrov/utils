@@ -6,7 +6,9 @@ if(TARGET utils)
   return()
 endif()
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/helpers.cmake)
+if(NOT CMAKE_HELPERS_INCLUDED)
+    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/helpers.cmake)
+endif()
 
 project(utils)
             
