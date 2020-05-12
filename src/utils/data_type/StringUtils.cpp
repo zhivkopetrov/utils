@@ -1,5 +1,5 @@
 // Corresponding header
-#include "utils/datatype/StringUtils.h"
+#include "utils/data_type/StringUtils.h"
 
 // C system headers
 

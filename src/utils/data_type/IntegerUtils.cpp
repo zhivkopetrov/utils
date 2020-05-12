@@ -1,5 +1,5 @@
 // Corresponding .h file
-#include "utils/datatype/IntegerUtils.h"
+#include "utils/data_type/IntegerUtils.h"
 
 // C system headers
 
