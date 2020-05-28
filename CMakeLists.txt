@@ -38,7 +38,6 @@ add_library(
         "${_INCLUDE_DIR}/time/TimerDefines.h"
         "${_INCLUDE_DIR}/LimitValues.hpp"
         "${_INCLUDE_DIR}/Log.h"
-        "${_INCLUDE_DIR}/Unused.h"
         
         "${_SRC_DIR}/common/CircularBuffer.cpp"
         "${_SRC_DIR}/common/Crc.cpp"
