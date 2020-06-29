@@ -33,7 +33,7 @@ std::string FileSystemUtils::getRootDirectory() {
   }
 
   constexpr auto buildDirName = "build";
-  const size_t buildDirPos = currDir.rfind("buildDirName");
+  const size_t buildDirPos = currDir.rfind(buildDirName);
   if (std::string::npos == buildDirPos) {
     LOGERR(
       "Error, '%s' directory not found, returning empty result", buildDirName);
@@ -43,7 +43,17 @@ std::string FileSystemUtils::getRootDirectory() {
   return currDir.substr(0, buildDirPos);
 }
 
-bool FileSystemUtils::isDirectoryPresent(const std::string dicrectoryAbsPath) {
+std::string FileSystemUtils::getCurrentFolderFromDirectory(
+      const std::string &dicrectoryAbsPath) {
+  const size_t slashPos = dicrectoryAbsPath.rfind("/");
+  if (std::string::npos == slashPos) {
+    return dicrectoryAbsPath; //is root dir
+  }
+  return dicrectoryAbsPath.substr(
+      slashPos, dicrectoryAbsPath.size() - slashPos - 1);
+}
+
+bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
   struct stat fileStat;
 
   // check if directory valid
@@ -54,14 +64,13 @@ bool FileSystemUtils::isDirectoryPresent(const std::string dicrectoryAbsPath) {
   }
 
   if (!S_ISDIR(fileStat.st_mode)) {
-    LOGERR("Error, '%s' is not a directory", dicrectoryAbsPath.c_str());
     return false;
   }
 
   return true;
 }
 
-int32_t FileSystemUtils::createDirectory(const std::string dicrectoryAbsPath) {
+int32_t FileSystemUtils::createDirectory(const std::string &dicrectoryAbsPath) {
   // create folder with read/write/search permissions for owner and
   // group, with read/search permissions for others
   if (-1 == mkdir(dicrectoryAbsPath.c_str(),

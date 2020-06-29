@@ -22,9 +22,12 @@ public:
 
   static std::string getRootDirectory();
 
-  static bool isDirectoryPresent(const std::string dicrectoryAbsPath);
+  static std::string getCurrentFolderFromDirectory(
+      const std::string &dicrectoryAbsPath);
 
-  static int32_t createDirectory(const std::string dicrectoryAbsPath);
+  static bool isDirectoryPresent(const std::string &dicrectoryAbsPath);
+
+  static int32_t createDirectory(const std::string &dicrectoryAbsPath);
 
   static int32_t getAllFilesInDirectoryRecursively(
       const std::string &dir,
