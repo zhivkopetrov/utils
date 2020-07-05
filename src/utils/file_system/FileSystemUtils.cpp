@@ -43,14 +43,15 @@ std::string FileSystemUtils::getRootDirectory() {
   return currDir.substr(0, buildDirPos);
 }
 
-std::string FileSystemUtils::getCurrentFolderFromDirectory(
-      const std::string &dicrectoryAbsPath) {
-  const size_t slashPos = dicrectoryAbsPath.rfind("/");
+std::string FileSystemUtils::getFileNameFromAbsolutePath(
+      const std::string &fileAbsPath) {
+  const size_t slashPos = fileAbsPath.rfind("/");
   if (std::string::npos == slashPos) {
-    return dicrectoryAbsPath; //is root dir
+    return fileAbsPath; //is root dir
   }
-  return dicrectoryAbsPath.substr(
-      slashPos, dicrectoryAbsPath.size() - slashPos - 1);
+
+  return fileAbsPath.substr(
+      slashPos + 1, fileAbsPath.size() - slashPos - 1);
 }
 
 bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
@@ -58,8 +59,6 @@ bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
 
   // check if directory valid
   if (-1 == stat(dicrectoryAbsPath.c_str(), &fileStat)) {
-    LOGERR("Error, ::stat() failed for directory '%s', Reason: %s",
-        dicrectoryAbsPath.c_str(), strerror(errno));
     return false;
   }
 
@@ -75,12 +74,45 @@ int32_t FileSystemUtils::createDirectory(const std::string &dicrectoryAbsPath) {
   // group, with read/search permissions for others
   if (-1 == mkdir(dicrectoryAbsPath.c_str(),
                   S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
-    LOGERR("Error, ::mkdir() failed for directory '%s', Reason: %s",
-        dicrectoryAbsPath.c_str(), strerror(errno));
-    return EXIT_FAILURE;
+    if (errno != EEXIST) {
+      LOGERR("Error, ::mkdir() failed for directory '%s', Reason: %s",
+          dicrectoryAbsPath.c_str(), strerror(errno));
+      return EXIT_FAILURE;
+    }
   }
 
   return EXIT_SUCCESS;
+}
+
+int32_t FileSystemUtils::createDirectoryRecursive(
+    const std::string &dicrectoryAbsPath) {
+  if (dicrectoryAbsPath.size() > PATH_MAX - 1) {
+      errno = ENAMETOOLONG;
+      return EXIT_FAILURE;
+  }
+
+  std::string path = dicrectoryAbsPath;
+  char *p = nullptr;
+
+  /* Iterate the string */
+  for (p = &path[1]; *p; ++p) {
+      if (*p == '/') {
+          /* Temporarily truncate */
+          *p = '\0';
+
+          if (EXIT_SUCCESS != FileSystemUtils::createDirectory(path)) {
+            return EXIT_FAILURE;
+          }
+
+          *p = '/';
+      }
+  }
+
+  if (EXIT_SUCCESS != FileSystemUtils::createDirectory(path)) {
+    return EXIT_FAILURE;
+  }
+
+  return 0;
 }
 
 int32_t FileSystemUtils::getAllFilesInDirectoryRecursively(
