@@ -15,6 +15,10 @@
 // Own components headers
 #include "utils/Log.h"
 
+namespace {
+constexpr auto buildDirName = "build";
+}
+
 std::string FileSystemUtils::getCurrentWorkingDirectory() {
   char cwd[512];
   if (nullptr != getcwd(cwd, sizeof(cwd))) {
@@ -32,7 +36,6 @@ std::string FileSystemUtils::getRootDirectory() {
     return std::string{};
   }
 
-  constexpr auto buildDirName = "build";
   const size_t buildDirPos = currDir.rfind(buildDirName);
   if (std::string::npos == buildDirPos) {
     LOGERR(
@@ -41,6 +44,18 @@ std::string FileSystemUtils::getRootDirectory() {
   }
 
   return currDir.substr(0, buildDirPos);
+}
+
+std::string FileSystemUtils::getBuildDirectory() {
+  const std::string buildDir =
+      FileSystemUtils::getRootDirectory() + buildDirName + "/";
+  if (buildDir == buildDirName) {
+    LOGERR(
+      "Error, FileSystemUtils::getRootDirectory(), returning empty result");
+    return std::string{};
+  }
+
+  return buildDir;
 }
 
 std::string FileSystemUtils::getFileNameFromAbsolutePath(

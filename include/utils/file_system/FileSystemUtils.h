@@ -22,6 +22,8 @@ public:
 
   static std::string getRootDirectory();
 
+  static std::string getBuildDirectory();
+
   static std::string getFileNameFromAbsolutePath(
       const std::string &fileAbsPath);
 
