@@ -10,29 +10,25 @@
 
 // Own components headers
 
-/* extract value from enumeration class */
+// extract value from enumeration class
 template <typename Enumeration>
-constexpr inline typename std::underlying_type<Enumeration>::type getEnumClassValue(
-    Enumeration const value) {
+constexpr auto getEnumValue(Enumeration const value) {
   return static_cast<typename std::underlying_type<Enumeration>::type>(value);
 }
 
-template <typename E>
-using enable_enum_t =
-    typename std::enable_if<std::is_enum<E>::value,
-                            typename std::underlying_type<E>::type>::type;
-
-template <typename E>
-constexpr inline enable_enum_t<E> underlying_value(E e) noexcept {
-  return static_cast<typename std::underlying_type<E>::type>(e);
-}
-
-/* build enum class from value */
+// build enum class from value
 template <typename E, typename T>
-constexpr inline typename std::enable_if<
-    std::is_enum<E>::value && std::is_integral<T>::value, E>::type
-toEnum(T value) noexcept {
+  constexpr inline auto toEnum(T value) noexcept {
+  static_assert(std::is_enum<E>::value, "Type should be enum!");
+  static_assert(std::is_integral<T>::value, "Type should be integral!");
   return static_cast<E>(value);
 }
+
+struct EnumClassHash {
+    template <typename T>
+    inline std::size_t operator()(T t) const {
+        return static_cast<std::size_t>(t);
+    }
+};
 
 #endif /* UTILS_ENUMCLASSUTILS_HPP_ */
