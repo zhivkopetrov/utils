@@ -20,7 +20,7 @@ constexpr auto buildDirName = "build";
 }
 
 std::string FileSystemUtils::getCurrentWorkingDirectory() {
-  char cwd[512];
+  char cwd[PATH_MAX];
   if (nullptr != getcwd(cwd, sizeof(cwd))) {
       return std::string(cwd);
   }
@@ -39,7 +39,8 @@ std::string FileSystemUtils::getRootDirectory() {
   const size_t buildDirPos = currDir.rfind(buildDirName);
   if (std::string::npos == buildDirPos) {
     LOGERR(
-      "Error, '%s' directory not found, returning empty result", buildDirName);
+      "Error, '%s' directory not found in currentWorkingDirectory: %s, "
+      "returning empty result", buildDirName, currDir.c_str());
     return std::string{};
   }
 

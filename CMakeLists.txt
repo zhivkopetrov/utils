@@ -12,48 +12,48 @@ endif()
 
 project(utils)
 
-set(_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/utils")
-set(_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/utils")
+set(_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/utils)
+set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/utils)
 
 add_library(
     ${PROJECT_NAME} 
     STATIC
-        "${_INCLUDE_DIR}/common/defines/SymbolNameDefines.h"
-        "${_INCLUDE_DIR}/common/AutoCircularBuffer.hpp"
-        "${_INCLUDE_DIR}/common/CircularBuffer.h"
-        "${_INCLUDE_DIR}/common/Crc.h"
-        "${_INCLUDE_DIR}/common/Position.h"
-        "${_INCLUDE_DIR}/concurrency/ThreadSafeQueue.hpp"
-        "${_INCLUDE_DIR}/data_type/EnumClassUtils.hpp"
-        "${_INCLUDE_DIR}/data_type/FloatingPoint.h"
-        "${_INCLUDE_DIR}/data_type/FloatingPointUtils.h"
-        "${_INCLUDE_DIR}/data_type/IntegerUtils.h"
-        "${_INCLUDE_DIR}/data_type/StringUtils.h"
-        "${_INCLUDE_DIR}/debug/FunctionTracer.hpp"
-        "${_INCLUDE_DIR}/debug/SignalHandler.h"
-        "${_INCLUDE_DIR}/debug/StackTrace.hpp"
-        "${_INCLUDE_DIR}/file_system/FileSystemUtils.h"
-        "${_INCLUDE_DIR}/rng/RNG.h"
-        "${_INCLUDE_DIR}/time/Time.h"
-        "${_INCLUDE_DIR}/time/TimerDefines.h"
-        "${_INCLUDE_DIR}/LimitValues.hpp"
-        "${_INCLUDE_DIR}/Log.h"
+        ${_INCLUDE_DIR}/common/defines/SymbolNameDefines.h
+        ${_INCLUDE_DIR}/common/AutoCircularBuffer.hpp
+        ${_INCLUDE_DIR}/common/CircularBuffer.h
+        ${_INCLUDE_DIR}/common/Crc.h
+        ${_INCLUDE_DIR}/common/Position.h
+        ${_INCLUDE_DIR}/concurrency/ThreadSafeQueue.hpp
+        ${_INCLUDE_DIR}/data_type/EnumClassUtils.hpp
+        ${_INCLUDE_DIR}/data_type/FloatingPoint.h
+        ${_INCLUDE_DIR}/data_type/FloatingPointUtils.h
+        ${_INCLUDE_DIR}/data_type/IntegerUtils.h
+        ${_INCLUDE_DIR}/data_type/StringUtils.h
+        ${_INCLUDE_DIR}/debug/FunctionTracer.hpp
+        ${_INCLUDE_DIR}/debug/SignalHandler.h
+        ${_INCLUDE_DIR}/debug/StackTrace.hpp
+        ${_INCLUDE_DIR}/file_system/FileSystemUtils.h
+        ${_INCLUDE_DIR}/rng/RNG.h
+        ${_INCLUDE_DIR}/time/Time.h
+        ${_INCLUDE_DIR}/time/TimerDefines.h
+        ${_INCLUDE_DIR}/LimitValues.hpp
+        ${_INCLUDE_DIR}/Log.h
         
-        "${_SRC_DIR}/common/CircularBuffer.cpp"
-        "${_SRC_DIR}/common/Crc.cpp"
-        "${_SRC_DIR}/common/Position.cpp"
-        "${_SRC_DIR}/data_type/FloatingPointUtils.cpp"
-        "${_SRC_DIR}/data_type/IntegerUtils.cpp"
-        "${_SRC_DIR}/data_type/StringUtils.cpp"
-        "${_SRC_DIR}/debug/SignalHandler.cpp"
-        "${_SRC_DIR}/drawing/Color.cpp"
-        "${_SRC_DIR}/drawing/Margins.cpp"
-        "${_SRC_DIR}/drawing/Point.cpp"
-        "${_SRC_DIR}/drawing/Rectangle.cpp"
-        "${_SRC_DIR}/drawing/WidgetAligner.cpp"
-        "${_SRC_DIR}/file_system/FileSystemUtils.cpp"
-        "${_SRC_DIR}/rng/RNG.cpp"
-        "${_SRC_DIR}/time/Time.cpp"
+        ${_SRC_DIR}/common/CircularBuffer.cpp
+        ${_SRC_DIR}/common/Crc.cpp
+        ${_SRC_DIR}/common/Position.cpp
+        ${_SRC_DIR}/data_type/FloatingPointUtils.cpp
+        ${_SRC_DIR}/data_type/IntegerUtils.cpp
+        ${_SRC_DIR}/data_type/StringUtils.cpp
+        ${_SRC_DIR}/debug/SignalHandler.cpp
+        ${_SRC_DIR}/drawing/Color.cpp
+        ${_SRC_DIR}/drawing/Margins.cpp
+        ${_SRC_DIR}/drawing/Point.cpp
+        ${_SRC_DIR}/drawing/Rectangle.cpp
+        ${_SRC_DIR}/drawing/WidgetAligner.cpp
+        ${_SRC_DIR}/file_system/FileSystemUtils.cpp
+        ${_SRC_DIR}/rng/RNG.cpp
+        ${_SRC_DIR}/time/Time.cpp
 )
 
 set_target_cpp_standard(${PROJECT_NAME} 17)
