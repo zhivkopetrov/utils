@@ -13,10 +13,9 @@
 // Forward declarations
 
 struct Point {
-  Point() : x(0), y(0) {}
+  Point();
 
-  explicit Point(const int32_t inputX, const int32_t inputY)
-      : x(inputX), y(inputY) {}
+  Point(const int32_t inputX, const int32_t inputY);
 
   inline bool operator==(const Point& other) const {
     return x == other.x && y == other.y;

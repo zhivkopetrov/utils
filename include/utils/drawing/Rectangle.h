@@ -14,15 +14,12 @@
 // Forward declarations
 
 struct Rectangle {
-  Rectangle() : x(0), y(0), w(0), h(0) {}
+  Rectangle();
 
-  explicit Rectangle(const int32_t inputX, const int32_t inputY,
-                     const int32_t inputW, const int32_t inputH)
-      : x(inputX), y(inputY), w(inputW), h(inputH) {}
+  Rectangle(const int32_t inputX, const int32_t inputY,
+            const int32_t inputW, const int32_t inputH);
 
-  explicit Rectangle(const Point& pos, const int32_t inputW,
-                     const int32_t inputH)
-      : x(pos.x), y(pos.y), w(inputW), h(inputH) {}
+  Rectangle(const Point& pos, const int32_t inputW, const int32_t inputH);
 
   inline bool operator==(const Rectangle& other) const {
     return x == other.x && y == other.y && w == other.w && h == other.h;
