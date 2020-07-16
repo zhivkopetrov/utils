@@ -15,7 +15,6 @@
 class Time {
  public:
   Time();
-  ~Time() = default;
 
   /** @brief used to measure elapsed time since last invoke of this method
    *         NOTE: .getElapsed() method simply measures time between 2
@@ -54,7 +53,7 @@ class Time {
    *
    *  @returns int64_t - elapsed time in nanoseconds
    * */
-  inline int64_t toNanoseconds() const {
+  int64_t toNanoseconds() const {
     return _elapsed.tv_sec * NANOSECOND + _elapsed.tv_nsec;
   }
 
@@ -63,7 +62,7 @@ class Time {
    *
    *  @returns int64_t - elapsed time in microseconds
    * */
-  inline int64_t toMicroseconds() const {
+  int64_t toMicroseconds() const {
     return _elapsed.tv_sec * MILLISECOND + _elapsed.tv_nsec / MICROSECOND;
   }
 
@@ -72,7 +71,7 @@ class Time {
    *
    *  @returns int64_t - elapsed time in milliseconds
    * */
-  inline int64_t toMilliseconds() const {
+  int64_t toMilliseconds() const {
     return _elapsed.tv_sec * MICROSECOND + _elapsed.tv_nsec / MILLISECOND;
   }
 
@@ -81,7 +80,7 @@ class Time {
    *
    *  @returns int64_t - elapsed time in seconds
    * */
-  inline int64_t toSeconds() const { return _elapsed.tv_sec; }
+  int64_t toSeconds() const { return _elapsed.tv_sec; }
 
   /** @brief used to acquiare system clock time with
    *                                          getClockTime kernel invoke
@@ -94,7 +93,7 @@ class Time {
    *
    *  @returns int64_t - unique timestamp (in seconds)
    * */
-  inline static int64_t getTimestamp() { return time(0); }
+  static inline int64_t getTimestamp() { return time(0); }
 
   /** @brief used to display the value of input timespec in nanoseconds
    *
@@ -102,7 +101,7 @@ class Time {
    *
    *  @returns int64_t        - value of input timespec in nanoseconds
    * */
-  inline static int64_t toNanoseconds(const timespec& ts) {
+  static inline int64_t toNanoseconds(const timespec& ts) {
     return ts.tv_sec * NANOSECOND + ts.tv_nsec;
   }
 
@@ -112,7 +111,7 @@ class Time {
    *
    *  @returns int64_t        - value of input timespec in microseconds
    * */
-  inline static int64_t toMicroseconds(const timespec& ts) {
+  static inline int64_t toMicroseconds(const timespec& ts) {
     return ts.tv_sec * MILLISECOND + ts.tv_nsec / MICROSECOND;
   }
 
@@ -122,7 +121,7 @@ class Time {
    *
    *  @returns int64_t        - value of input timespec in milliseconds
    * */
-  inline static int64_t toMilliseconds(const timespec& ts) {
+  static inline int64_t toMilliseconds(const timespec& ts) {
     return ts.tv_sec * MICROSECOND + ts.tv_nsec / MILLISECOND;
   }
 
@@ -132,7 +131,7 @@ class Time {
    *
    *  @returns int64_t        - value of input timespec in seconds
    * */
-  inline static int64_t toSeconds(const timespec& ts) { return ts.tv_sec; }
+  static inline int64_t toSeconds(const timespec& ts) { return ts.tv_sec; }
 
  private:
   // used to measure time from the creation of the Time instance

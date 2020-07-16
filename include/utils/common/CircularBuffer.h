@@ -12,8 +12,6 @@
 
 // Forward declarations
 
-#define DEFAULT_CIRCULAR_BUFFER_SIZE 2048
-
 class CircularBuffer {
  public:
   CircularBuffer();
@@ -86,7 +84,7 @@ class CircularBuffer {
    *
    *  @return uint64_t - empty bytes for writing count
    * */
-  inline uint64_t getFree() const {
+  uint64_t getFree() const {
     return (_capacity - 1 - _writeIndex + _readIndex) % _capacity;
   }
 
@@ -94,12 +92,12 @@ class CircularBuffer {
    *
    *  @return uint64_t - occupied bytes from reading count
    * */
-  inline uint64_t getUsed() const {
+  uint64_t getUsed() const {
     return (_writeIndex >= _readIndex) ? _writeIndex - _readIndex
                                        : _capacity - _readIndex + _writeIndex;
   }
 
-  inline bool isEmpty() const { return _writeIndex == _readIndex; }
+  bool isEmpty() const { return _writeIndex == _readIndex; }
 
   /** @brief used to completely empty the CircularBuffer from it's
    *         content, (like after successful initialization status) */
@@ -122,7 +120,7 @@ class CircularBuffer {
    *                 buff >> var1 >> var2 >> var3;
    * */
   template <class T>
-  inline CircularBuffer &operator>>(T &value) {
+  CircularBuffer &operator>>(T &value) {
     read(reinterpret_cast<uint8_t *>(&value), sizeof(value));
 
     return *this;
@@ -147,19 +145,23 @@ class CircularBuffer {
    *                 buff << var1 << var2 << var3;
    * */
   template <class T>
-  inline CircularBuffer &operator<<(const T value) {
+  CircularBuffer &operator<<(const T value) {
     write(reinterpret_cast<const uint8_t *>(&value), sizeof(value));
 
     return *this;
   }
 
  private:
+  enum : uint64_t {
+    DEFAULT_CIRCULAR_BUFFER_SIZE = 2048
+  };
+
   /** @brief used internally update the read/write index
    *
    *  @param const uint64_t - number of processes bytes
    *  @param uint64_t &     - reference to the current read/write index
    * */
-  inline void updateIndex(const uint64_t processedBytes, uint64_t &index) {
+  void updateIndex(const uint64_t processedBytes, uint64_t &index) {
     processedBytes >= (_capacity - index)
         ? index = index + processedBytes - _capacity
         : index = index + processedBytes;

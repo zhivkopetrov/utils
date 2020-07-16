@@ -21,15 +21,15 @@ struct Rectangle {
 
   Rectangle(const Point& pos, const int32_t inputW, const int32_t inputH);
 
-  inline bool operator==(const Rectangle& other) const {
+  bool operator==(const Rectangle& other) const {
     return x == other.x && y == other.y && w == other.w && h == other.h;
   }
 
-  inline bool operator!=(const Rectangle& other) const {
+  bool operator!=(const Rectangle& other) const {
     return !(*this == other);
   }
 
-  inline Rectangle& operator-(const Rectangle& other) {
+  Rectangle& operator-(const Rectangle& other) {
     x -= other.x;
     y -= other.y;
     w -= other.w;
@@ -38,7 +38,7 @@ struct Rectangle {
     return *this;
   }
 
-  inline Rectangle& operator-=(const Rectangle& other) {
+  Rectangle& operator-=(const Rectangle& other) {
     x -= other.x;
     y -= other.y;
     w -= other.w;
@@ -47,7 +47,7 @@ struct Rectangle {
     return *this;
   }
 
-  inline Rectangle& operator+(const Rectangle& other) {
+  Rectangle& operator+(const Rectangle& other) {
     x += other.x;
     y += other.y;
     w += other.w;
@@ -56,7 +56,7 @@ struct Rectangle {
     return *this;
   }
 
-  inline Rectangle& operator+=(const Rectangle& other) {
+  Rectangle& operator+=(const Rectangle& other) {
     x += other.x;
     y += other.y;
     w += other.w;
@@ -73,7 +73,7 @@ struct Rectangle {
    *
    *  @returns bool            - is point inside or not
    * */
-  inline bool isPointInRect(const Point& point) const {
+  bool isPointInRect(const Point& point) const {
     return (point.x >= x) && (point.x < (x + w)) && (point.y >= y) &&
            (point.y < (y + h));
   }
@@ -86,7 +86,7 @@ struct Rectangle {
    *
    *  @returns bool            - is point inside or not
    * */
-  inline static bool isPointInRect(const Point& point, const Rectangle& rect) {
+  static inline bool isPointInRect(const Point& point, const Rectangle& rect) {
     return (point.x >= rect.x) && (point.x < (rect.x + rect.w)) &&
            (point.y >= rect.y) && (point.y < (rect.y + rect.h));
   }

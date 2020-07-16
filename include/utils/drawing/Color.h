@@ -46,16 +46,15 @@ class Color {
 
   // forbid default constructor
   Color() = delete;
-  ~Color() = default;
 
-  inline bool operator==(const Color& other) const {
+   bool operator==(const Color& other) const {
     return rgba.r == other.rgba.r && rgba.g == other.rgba.g &&
            rgba.b == other.rgba.b && rgba.a == other.rgba.a;
   }
 
-  inline bool operator!=(const Color& other) const { return !(*this == other); }
+   bool operator!=(const Color& other) const { return !(*this == other); }
 
-  inline uint32_t get32BitRGBA() const {
+   uint32_t get32BitRGBA() const {
     return (rgba.r & 0xFF000000) | (rgba.g & 0x00FF0000) |
            (rgba.b & 0x0000FF00) | (rgba.a & 0x000000FF);
   }

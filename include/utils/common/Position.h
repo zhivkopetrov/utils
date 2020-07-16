@@ -39,9 +39,7 @@ class Position {
    */
   static inline int32_t getMiddleX(const int32_t sectionX,
                                    const int32_t sectionWidth,
-                                   const int32_t imageWidth)
-
-  {
+                                   const int32_t imageWidth) {
     return sectionX + ((sectionWidth - imageWidth) / 2);
   }
 
@@ -55,9 +53,7 @@ class Position {
    */
   static inline int32_t getMiddleY(const int32_t sectionY,
                                    const int32_t sectionHeight,
-                                   const int32_t imageHeight)
-
-  {
+                                   const int32_t imageHeight) {
     return sectionY + ((sectionHeight - imageHeight) / 2);
   }
 
@@ -82,9 +78,7 @@ class Position {
    */
   static inline int32_t getRightX(const int32_t sectionX,
                                   const int32_t sectionWidth,
-                                  const int32_t imageWidth)
-
-  {
+                                  const int32_t imageWidth) {
     return sectionX + (sectionWidth - imageWidth);
   }
 };

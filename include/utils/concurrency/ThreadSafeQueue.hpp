@@ -222,7 +222,7 @@ class ThreadSafeQueue {
    *
    *  @param bool - is queue empty or not
    * */
-  inline bool isEmpty() const {
+  bool isEmpty() const {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 
@@ -234,7 +234,7 @@ class ThreadSafeQueue {
    *
    *  @param uint64_t - the size of the queue container
    * */
-  inline uint64_t size() const {
+  uint64_t size() const {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 
@@ -246,7 +246,7 @@ class ThreadSafeQueue {
    *         (usually invoking of this method by the developer should be
    *          followed by joining thread producers and thread consumers)
    * */
-  inline void shutdown() {
+  void shutdown() {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 

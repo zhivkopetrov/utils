@@ -17,34 +17,34 @@ struct Point {
 
   Point(const int32_t inputX, const int32_t inputY);
 
-  inline bool operator==(const Point& other) const {
+  bool operator==(const Point& other) const {
     return x == other.x && y == other.y;
   }
 
-  inline bool operator!=(const Point& other) const { return !(*this == other); }
+  bool operator!=(const Point& other) const { return !(*this == other); }
 
-  inline Point& operator+(const Point& other) {
+  Point& operator+(const Point& other) {
     x += other.x;
     y += other.y;
 
     return *this;
   }
 
-  inline Point& operator+=(const Point& other) {
+  Point& operator+=(const Point& other) {
     x += other.x;
     y += other.y;
 
     return *this;
   }
 
-  inline Point& operator-(const Point& other) {
+  Point& operator-(const Point& other) {
     x -= other.x;
     y -= other.y;
 
     return *this;
   }
 
-  inline Point& operator-=(const Point& other) {
+  Point& operator-=(const Point& other) {
     x -= other.x;
     y -= other.y;
 
