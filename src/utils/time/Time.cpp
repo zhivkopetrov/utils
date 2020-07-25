@@ -5,16 +5,16 @@
 
 // C++ system headers
 #include <cerrno>
-#include <cstdlib>
 #include <cstring>
 
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
 Time::Time() {
-  if (EXIT_SUCCESS != clock_gettime(CLOCK_MONOTONIC, &_startTime)) {
+  if (SUCCESS != clock_gettime(CLOCK_MONOTONIC, &_startTime)) {
     LOGERR("clock_gettime() failed, reason: %s", strerror(errno));
   }
 
@@ -27,7 +27,7 @@ Time::Time() {
 Time& Time::getElapsed() {
   timespec now;
 
-  if (EXIT_SUCCESS != clock_gettime(CLOCK_MONOTONIC, &now)) {
+  if (SUCCESS != clock_gettime(CLOCK_MONOTONIC, &now)) {
     LOGERR("clock_gettime() failed, reason: %s", strerror(errno));
   }
 
@@ -48,7 +48,7 @@ Time& Time::getElapsed() {
 Time& Time::getElapsedFromStart() {
   timespec now;
 
-  if (EXIT_SUCCESS != clock_gettime(CLOCK_MONOTONIC, &now)) {
+  if (SUCCESS != clock_gettime(CLOCK_MONOTONIC, &now)) {
     LOGERR("clock_gettime() failed, reason: %s", strerror(errno));
   }
 
@@ -64,7 +64,7 @@ Time& Time::getElapsedFromStart() {
 }
 
 void Time::getClockTime(timespec* outClockTime) {
-  if (EXIT_SUCCESS != clock_gettime(CLOCK_REALTIME, outClockTime)) {
+  if (SUCCESS != clock_gettime(CLOCK_REALTIME, outClockTime)) {
     LOGERR("clock_gettime() failed, reason: %s", strerror(errno));
   }
 }

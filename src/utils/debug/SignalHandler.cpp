@@ -9,6 +9,7 @@
 
 // Own components headers
 #include "utils/debug/StackTrace.hpp"
+#include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
 void SignalHandler::installSignal(const int32_t signalNumber) {
@@ -29,7 +30,7 @@ void SignalHandler::segFaultHandler(const int32_t) {
   LOG("Received signal SIGSEGV, Segmentation fault. Printing stack trace:");
   printStacktrace();
 
-  exit(EXIT_FAILURE);
+  exit(FAILURE);
 }
 
 void SignalHandler::sigQuitHandler(const int32_t) {

@@ -9,6 +9,7 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 
 RNG::RNG() : _skipRange(7) {}
 
@@ -27,9 +28,9 @@ int32_t RNG::initialize() {
         static_cast<uint32_t>(r * std::numeric_limits<uint32_t>::max());
 
     _mtRng.seed(mtSeed);
-    return EXIT_SUCCESS;
+    return SUCCESS;
   } catch (const std::exception& e) {
-    return EXIT_FAILURE;
+    return FAILURE;
   }
 }
 

@@ -36,6 +36,7 @@ add_library(
         ${_INCLUDE_DIR}/rng/RNG.h
         ${_INCLUDE_DIR}/time/Time.h
         ${_INCLUDE_DIR}/time/TimerDefines.h
+        ${_INCLUDE_DIR}/ErrorCode.h
         ${_INCLUDE_DIR}/LimitValues.hpp
         ${_INCLUDE_DIR}/Log.h
         

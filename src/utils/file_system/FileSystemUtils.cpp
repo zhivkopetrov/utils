@@ -13,6 +13,7 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
 namespace {
@@ -93,18 +94,18 @@ int32_t FileSystemUtils::createDirectory(const std::string &dicrectoryAbsPath) {
     if (errno != EEXIST) {
       LOGERR("Error, ::mkdir() failed for directory '%s', Reason: %s",
           dicrectoryAbsPath.c_str(), strerror(errno));
-      return EXIT_FAILURE;
+      return FAILURE;
     }
   }
 
-  return EXIT_SUCCESS;
+  return SUCCESS;
 }
 
 int32_t FileSystemUtils::createDirectoryRecursive(
     const std::string &dicrectoryAbsPath) {
   if (dicrectoryAbsPath.size() > PATH_MAX - 1) {
       errno = ENAMETOOLONG;
-      return EXIT_FAILURE;
+      return FAILURE;
   }
 
   std::string path = dicrectoryAbsPath;
@@ -116,16 +117,16 @@ int32_t FileSystemUtils::createDirectoryRecursive(
           /* Temporarily truncate */
           *p = '\0';
 
-          if (EXIT_SUCCESS != FileSystemUtils::createDirectory(path)) {
-            return EXIT_FAILURE;
+          if (SUCCESS != FileSystemUtils::createDirectory(path)) {
+            return FAILURE;
           }
 
           *p = '/';
       }
   }
 
-  if (EXIT_SUCCESS != FileSystemUtils::createDirectory(path)) {
-    return EXIT_FAILURE;
+  if (SUCCESS != FileSystemUtils::createDirectory(path)) {
+    return FAILURE;
   }
 
   return 0;
@@ -135,7 +136,7 @@ int32_t FileSystemUtils::getAllFilesInDirectoryRecursively(
       const std::string& dir,
       const std::vector<std::string> &blackListFolderNames,
       std::vector<std::string> &outFilesAbsPath) {
-  int32_t err = EXIT_SUCCESS;
+  int32_t err = SUCCESS;
   parseDirectory(dir, blackListFolderNames, outFilesAbsPath, err);
   return err;
 }
@@ -145,7 +146,7 @@ void FileSystemUtils::parseDirectory(
     const std::vector<std::string> &blackListFolderNames,
     std::vector<std::string> &outFilesAbsPath, int32_t &errCode) {
 
-  if (EXIT_SUCCESS != errCode) {
+  if (SUCCESS != errCode) {
     return;
   }
 
@@ -154,10 +155,10 @@ void FileSystemUtils::parseDirectory(
   currentDir = opendir(dir.c_str());
   if (nullptr == currentDir) {
     LOGERR("Error in opendir(%s), reason: %s", dir.c_str(), strerror(errno));
-    errCode = EXIT_FAILURE;
+    errCode = FAILURE;
   }
 
-  if (EXIT_SUCCESS == errCode) {
+  if (SUCCESS == errCode) {
     struct dirent* dirP = nullptr;
     std::string filePath = "";
 
@@ -196,9 +197,9 @@ void FileSystemUtils::parseDirectory(
     }
   }
 
-  if (EXIT_SUCCESS != closedir(currentDir)) {
+  if (SUCCESS != closedir(currentDir)) {
     LOGERR("Error in closedir(), reason: %s", strerror(errno));
-    errCode = EXIT_FAILURE;
+    errCode = FAILURE;
   }
 }
 

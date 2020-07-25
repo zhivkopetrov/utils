@@ -5,12 +5,12 @@
 
 // C++ system headers
 #include <algorithm>  //for std::min
-#include <cstdlib>
 #include <cstring>
 
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
 // default constructor
@@ -61,27 +61,21 @@ CircularBuffer::~CircularBuffer() {
 }
 
 int32_t CircularBuffer::init(const uint64_t capacity) {
-  int32_t err = EXIT_SUCCESS;
-
   if (_buf) {
     LOGERR("CircularBuffer already initialized! Will not initialize twice");
-
-    err = EXIT_FAILURE;
-  } else {
-    _buf = new uint8_t[capacity];
-
-    if (nullptr == _buf) {
-      LOGERR("Error, bad alloc for _buf");
-
-      err = EXIT_FAILURE;
-    } else {
-      _capacity = capacity;
-
-      memset(_buf, 0, _capacity);
-    }
+    return FAILURE;
   }
 
-  return err;
+  _buf = new uint8_t[capacity];
+  if (nullptr == _buf) {
+    LOGERR("Error, bad alloc for _buf");
+    return FAILURE;
+  }
+
+  _capacity = capacity;
+  memset(_buf, 0, _capacity);
+
+  return SUCCESS;
 }
 
 uint64_t CircularBuffer::read(uint8_t* outData, const uint64_t bytes) {

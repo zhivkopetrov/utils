@@ -5,12 +5,12 @@
 
 // C++ system headers
 #include <cctype>
-#include <cstdlib>
 #include <sstream>
 
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
 int32_t StringUtils::extractIntsFromString(const std::string& data,
@@ -31,10 +31,8 @@ int32_t StringUtils::extractIntsFromString(const std::string& data,
   }
 
   if (0 == tokens.size()) {
-    LOGERR(
-        "Error, empty string data provided -> "
-        "no tokenize is possible");
-    return EXIT_FAILURE;
+    LOGERR("Error, empty string data provided -> no tokenize is possible");
+    return FAILURE;
   }
 
   const uint32_t TOKENS_SIZE = static_cast<uint32_t>(tokens.size());
@@ -53,7 +51,7 @@ int32_t StringUtils::extractIntsFromString(const std::string& data,
     }
   }
 
-  return EXIT_SUCCESS;
+  return SUCCESS;
 }
 
 int32_t StringUtils::extractDoublesFromString(const std::string& data,
@@ -74,10 +72,8 @@ int32_t StringUtils::extractDoublesFromString(const std::string& data,
   }
 
   if (0 == tokens.size()) {
-    LOGERR(
-        "Error, empty string data provided -> "
-        "no tokenize is possible");
-    return EXIT_FAILURE;
+    LOGERR("Error, empty string data provided -> no tokenize is possible");
+    return FAILURE;
   }
 
   const uint32_t TOKENS_SIZE = static_cast<uint32_t>(tokens.size());
@@ -96,7 +92,7 @@ int32_t StringUtils::extractDoublesFromString(const std::string& data,
     }
   }
 
-  return EXIT_SUCCESS;
+  return SUCCESS;
 }
 
 void StringUtils::tokenize(const std::string& data,
@@ -133,11 +129,8 @@ int32_t StringUtils::safeStoi(const std::string& data) {
       // check if it starts with a sign symbol
       // if yes -> check if it has any digits behind it
       if (!(DATA_SIZE > 1 && (('-' == data[0]) || ('+' == data[0])))) {
-        LOGERR(
-            "Warning, data: [%s] is not in numerical format ->"
-            "stoi will return result 0: %d",
-            data.c_str(), 0);
-
+        LOGERR("Warning, data: [%s] is not in numerical format -> stoi will "
+               "return result 0: %d", data.c_str(), 0);
         return 0;
       }
     }
@@ -166,11 +159,8 @@ double StringUtils::safeStod(const std::string& data) {
       // check if it starts with a sign symbol
       // if yes -> check if it has any digits behind it
       if (!(DATA_SIZE > 1 && (('-' == data[0]) || ('+' == data[0])))) {
-        LOGERR(
-            "Warning, data: [%s] is not in numerical format ->"
-            "stod will return result 0: %d",
-            data.c_str(), 0);
-
+        LOGERR("Warning, data: [%s] is not in numerical format -> stod will "
+               "return result 0: %d", data.c_str(), 0);
         return 0;
       }
     }
@@ -186,11 +176,8 @@ double StringUtils::safeStod(const std::string& data) {
         continue;
       }
 
-      LOGERR(
-          "Warning, data: [%s] is not in numerical format ->"
-          "stod will return result 0: %d",
-          data.c_str(), 0);
-
+      LOGERR("Warning, data: [%s] is not in numerical format -> stod will "
+             "return result 0: %d", data.c_str(), 0);
       return 0;
     }
   }
