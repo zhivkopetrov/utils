@@ -24,13 +24,17 @@ const Color PURPLE(128, 0, 128, 255);
 const Color DARK_GREEN(6, 65, 14, 255);
 const Color CARAMEL_GOLD(254, 213, 151, 255);
 const Color FULL_TRANSPARENT(0, 0, 0, 0);
+const Color FIRE(226, 88, 34, 0);
+const Color SMOKE(105, 105, 105, 0);
+const Color ICE(212, 239, 235, 0);
+const Color LIGHTNING(192, 192, 192, 0);
 }  // namespace Colors
 
 Color::Color(const uint32_t inputRgba) {
-  rgba.r = static_cast<uint8_t>((inputRgba & 0xFF000000) >> 24);
-  rgba.g = static_cast<uint8_t>((inputRgba & 0x00FF0000) >> 16);
-  rgba.b = static_cast<uint8_t>((inputRgba & 0x0000FF00) >> 8);
-  rgba.a = static_cast<uint8_t>((inputRgba & 0x000000FF));
+  rgba.r = static_cast<uint8_t>( (inputRgba & 0xFF000000) >> 24);
+  rgba.g = static_cast<uint8_t>( (inputRgba & 0x00FF0000) >> 16);
+  rgba.b = static_cast<uint8_t>( (inputRgba & 0x0000FF00) >> 8);
+  rgba.a = static_cast<uint8_t>( (inputRgba & 0x000000FF));
 }
 
 Color::Color(const uint8_t red, const uint8_t green, const uint8_t blue,

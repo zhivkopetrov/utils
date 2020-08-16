@@ -77,6 +77,10 @@ extern const Color PURPLE;
 extern const Color DARK_GREEN;
 extern const Color CARAMEL_GOLD;
 extern const Color FULL_TRANSPARENT;
+extern const Color FIRE;
+extern const Color SMOKE;
+extern const Color ICE;
+extern const Color LIGHTNING;
 }  // namespace Colors
 
 #endif /* UTILS_COLOR_H_ */
