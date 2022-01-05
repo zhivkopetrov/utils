@@ -12,9 +12,9 @@
 #include "utils/drawing/Point.h"
 
 // Forward declarations
+struct Rectangle;
 class Widget;
 class ButtonBase;
-class Rectangle;
 
 enum class WidgetAlignment {
   UPPER_LEFT = 0,

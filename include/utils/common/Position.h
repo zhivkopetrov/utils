@@ -11,8 +11,8 @@
 // Own components headers
 
 // Forward declarations
-class Rectangle;
-class Point;
+struct Rectangle;
+struct Point;
 
 class Position {
  public:
