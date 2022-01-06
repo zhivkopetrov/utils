@@ -12,31 +12,31 @@ endif()
 
 project(utils)
 
-set(_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/utils)
+set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/utils)
 set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_library(
     ${PROJECT_NAME} 
     STATIC
-        ${_INCLUDE_DIR}/common/defines/SymbolNameDefines.h
-        ${_INCLUDE_DIR}/common/AutoCircularBuffer.hpp
-        ${_INCLUDE_DIR}/common/CircularBuffer.h
-        ${_INCLUDE_DIR}/common/Crc.h
-        ${_INCLUDE_DIR}/common/Position.h
-        ${_INCLUDE_DIR}/concurrency/ThreadSafeQueue.hpp
-        ${_INCLUDE_DIR}/data_type/EnumClassUtils.hpp
-        ${_INCLUDE_DIR}/data_type/FloatingPoint.h
-        ${_INCLUDE_DIR}/data_type/FloatingPointUtils.h
-        ${_INCLUDE_DIR}/data_type/IntegerUtils.h
-        ${_INCLUDE_DIR}/data_type/StringUtils.h
-        ${_INCLUDE_DIR}/debug/FunctionTracer.hpp
-        ${_INCLUDE_DIR}/debug/SignalHandler.h
-        ${_INCLUDE_DIR}/debug/StackTrace.hpp
-        ${_INCLUDE_DIR}/file_system/FileSystemUtils.h
-        ${_INCLUDE_DIR}/time/Time.h
-        ${_INCLUDE_DIR}/ErrorCode.h
-        ${_INCLUDE_DIR}/LimitValues.hpp
-        ${_INCLUDE_DIR}/Log.h
+        ${_INC_DIR}/common/defines/SymbolNameDefines.h
+        ${_INC_DIR}/common/AutoCircularBuffer.hpp
+        ${_INC_DIR}/common/CircularBuffer.h
+        ${_INC_DIR}/common/Crc.h
+        ${_INC_DIR}/common/Position.h
+        ${_INC_DIR}/concurrency/ThreadSafeQueue.hpp
+        ${_INC_DIR}/data_type/EnumClassUtils.hpp
+        ${_INC_DIR}/data_type/FloatingPoint.h
+        ${_INC_DIR}/data_type/FloatingPointUtils.h
+        ${_INC_DIR}/data_type/IntegerUtils.h
+        ${_INC_DIR}/data_type/StringUtils.h
+        ${_INC_DIR}/debug/FunctionTracer.hpp
+        ${_INC_DIR}/debug/SignalHandler.h
+        ${_INC_DIR}/debug/StackTrace.hpp
+        ${_INC_DIR}/file_system/FileSystemUtils.h
+        ${_INC_DIR}/time/Time.h
+        ${_INC_DIR}/ErrorCode.h
+        ${_INC_DIR}/LimitValues.hpp
+        ${_INC_DIR}/Log.h
         
         ${_SRC_DIR}/common/CircularBuffer.cpp
         ${_SRC_DIR}/common/Crc.cpp
