@@ -11,23 +11,23 @@ add_library(
     ${PROJECT_NAME} 
     STATIC
         ${_INC_DIR}/common/defines/SymbolNameDefines.h
-        ${_INC_DIR}/common/AutoCircularBuffer.hpp
+        ${_INC_DIR}/common/AutoCircularBuffer.h
         ${_INC_DIR}/common/CircularBuffer.h
         ${_INC_DIR}/common/Crc.h
         ${_INC_DIR}/common/Position.h
-        ${_INC_DIR}/concurrency/ThreadSafeQueue.hpp
-        ${_INC_DIR}/data_type/EnumClassUtils.hpp
+        ${_INC_DIR}/concurrency/ThreadSafeQueue.h
+        ${_INC_DIR}/data_type/EnumClassUtils.h
         ${_INC_DIR}/data_type/FloatingPoint.h
         ${_INC_DIR}/data_type/FloatingPointUtils.h
         ${_INC_DIR}/data_type/IntegerUtils.h
         ${_INC_DIR}/data_type/StringUtils.h
-        ${_INC_DIR}/debug/FunctionTracer.hpp
+        ${_INC_DIR}/debug/FunctionTracer.h
         ${_INC_DIR}/debug/SignalHandler.h
-        ${_INC_DIR}/debug/StackTrace.hpp
+        ${_INC_DIR}/debug/StackTrace.h
         ${_INC_DIR}/file_system/FileSystemUtils.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/ErrorCode.h
-        ${_INC_DIR}/LimitValues.hpp
+        ${_INC_DIR}/LimitValues.h
         ${_INC_DIR}/Log.h
         
         ${_SRC_DIR}/common/CircularBuffer.cpp

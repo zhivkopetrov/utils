@@ -10,7 +10,7 @@
 
 // Own components headers
 #include "utils/drawing/Rectangle.h"
-#include "utils/LimitValues.hpp"
+#include "utils/LimitValues.h"
 #include "utils/Log.h"
 
 Point WidgetAligner::getPosition(const int32_t widgetWidth,

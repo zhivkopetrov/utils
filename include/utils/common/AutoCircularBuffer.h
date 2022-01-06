@@ -1,5 +1,5 @@
 /*
- * AutoCircularBuffer.hpp
+ * AutoCircularBuffer.h
  *
  * @brief an automatic storage implementation of the CircularBuffer class.
  *        The AutoCircularBuffer is practically the same as CircularBuffer
@@ -13,8 +13,8 @@
  *                                                 to stack overflow exception.
  */
 
-#ifndef UTILS_AUTOCIRCULARBUFFER_HPP_
-#define UTILS_AUTOCIRCULARBUFFER_HPP_
+#ifndef UTILS_AUTOCIRCULARBUFFER_H_
+#define UTILS_AUTOCIRCULARBUFFER_H_
 
 // C system headers
 

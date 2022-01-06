@@ -8,7 +8,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "utils/debug/StackTrace.hpp"
+#include "utils/debug/StackTrace.h"
 #include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
