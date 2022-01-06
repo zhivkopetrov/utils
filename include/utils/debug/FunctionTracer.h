@@ -1,8 +1,8 @@
-#ifndef UTILS_FUNCTIONTRACER_HPP_
-#define UTILS_FUNCTIONTRACER_HPP_
+#ifndef UTILS_FUNCTIONTRACER_H_
+#define UTILS_FUNCTIONTRACER_H_
 
 /*
- * FunctionTracer.hpp
+ * FunctionTracer.h
  * Generic class for tracing the function calls
  *      Example of usage:
  *
@@ -98,4 +98,4 @@ class FunctionTracer {
 
 #endif /* DEEP_TRACING_ENABLED */
 
-#endif /* UTILS_FUNCTIONTRACER_HPP_ */
+#endif /* UTILS_FUNCTIONTRACER_H_ */

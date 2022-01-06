@@ -1,5 +1,5 @@
-#ifndef UTILS_ENUMCLASSUTILS_HPP_
-#define UTILS_ENUMCLASSUTILS_HPP_
+#ifndef UTILS_ENUMCLASSUTILS_H_
+#define UTILS_ENUMCLASSUTILS_H_
 
 // C system headers
 
@@ -31,4 +31,4 @@ struct EnumClassHash {
     }
 };
 
-#endif /* UTILS_ENUMCLASSUTILS_HPP_ */
+#endif /* UTILS_ENUMCLASSUTILS_H_ */

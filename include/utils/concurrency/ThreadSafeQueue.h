@@ -1,10 +1,10 @@
 /*
- * ThreadSafeQueue.hpp
+ * ThreadSafeQueue.h
  *  @brief: thread-safe multiple producer, multiple consumer queue
  */
 
-#ifndef UTILS_THREADSAFEQUEUE_HPP_
-#define UTILS_THREADSAFEQUEUE_HPP_
+#ifndef UTILS_THREADSAFEQUEUE_H_
+#define UTILS_THREADSAFEQUEUE_H_
 
 // C system headers
 
@@ -276,4 +276,4 @@ class ThreadSafeQueue {
   std::atomic<bool> _isKilled;
 };
 
-#endif /* UTILS_THREADSAFEQUEUE_HPP_ */
+#endif /* UTILS_THREADSAFEQUEUE_H_ */

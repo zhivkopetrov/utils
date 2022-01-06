@@ -1,5 +1,5 @@
-#ifndef UTILS_STACKTRACE_HPP_
-#define UTILS_STACKTRACE_HPP_
+#ifndef UTILS_STACKTRACE_H_
+#define UTILS_STACKTRACE_H_
 
 // C system headers
 #include <cxxabi.h>
@@ -104,4 +104,4 @@ static void printStacktrace(const int32_t maxFrames = 127) {
   }
 }
 
-#endif /* UTILS_STACKTRACE_HPP_ */
+#endif /* UTILS_STACKTRACE_H_ */

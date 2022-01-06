@@ -4,8 +4,8 @@
  *  Use to initialize values with their maximum values.
  */
 
-#ifndef UTILS_LIMITVALUES_HPP_
-#define UTILS_LIMITVALUES_HPP_
+#ifndef UTILS_LIMITVALUES_H_
+#define UTILS_LIMITVALUES_H_
 
 // C system headers
 
@@ -30,4 +30,4 @@
 
 #define INIT_SIZE_T_VALUE std::numeric_limits<size_t>::max()
 
-#endif /* UTILS_LIMITVALUES_HPP_ */
+#endif /* UTILS_LIMITVALUES_H_ */
