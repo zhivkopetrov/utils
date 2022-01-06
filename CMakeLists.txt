@@ -33,9 +33,7 @@ add_library(
         ${_INCLUDE_DIR}/debug/SignalHandler.h
         ${_INCLUDE_DIR}/debug/StackTrace.hpp
         ${_INCLUDE_DIR}/file_system/FileSystemUtils.h
-        ${_INCLUDE_DIR}/rng/RNG.h
         ${_INCLUDE_DIR}/time/Time.h
-        ${_INCLUDE_DIR}/time/TimerDefines.h
         ${_INCLUDE_DIR}/ErrorCode.h
         ${_INCLUDE_DIR}/LimitValues.hpp
         ${_INCLUDE_DIR}/Log.h
@@ -53,7 +51,6 @@ add_library(
         ${_SRC_DIR}/drawing/Rectangle.cpp
         ${_SRC_DIR}/drawing/WidgetAligner.cpp
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
-        ${_SRC_DIR}/rng/RNG.cpp
         ${_SRC_DIR}/time/Time.cpp
 )
 
