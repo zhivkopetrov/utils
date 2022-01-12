@@ -38,11 +38,9 @@ std::string FileSystemUtils::getRootDirectory() {
   }
 
   const size_t buildDirPos = currDir.rfind(buildDirName);
+  //build not found -> this means cwd is in top level (above build)
   if (std::string::npos == buildDirPos) {
-    LOGERR(
-      "Error, '%s' directory not found in currentWorkingDirectory: %s, "
-      "returning empty result", buildDirName, currDir.c_str());
-    return std::string{};
+    return currDir + "/";
   }
 
   return currDir.substr(0, buildDirPos);
