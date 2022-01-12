@@ -2,13 +2,21 @@
 
 cmake_minimum_required(VERSION 3.10.2)
 
-project(utils)
+project(
+    utils 
+    LANGUAGES CXX
+    VERSION 1.0.0
+)
 
-set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include/utils)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/find_modules)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/helpers.cmake)
+
+set(_INC_FOLDER_NAME include)
+set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}/utils)
 set(_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_library(
-    ${PROJECT_NAME} 
+    ${PROJECT_NAME}
     STATIC
         ${_INC_DIR}/common/defines/SymbolNameDefines.h
         ${_INC_DIR}/common/AutoCircularBuffer.h
@@ -29,6 +37,8 @@ add_library(
         ${_INC_DIR}/ErrorCode.h
         ${_INC_DIR}/LimitValues.h
         ${_INC_DIR}/Log.h
+        ${_INC_DIR}/drawing/Point.h
+        ${_INC_DIR}/drawing/Rectangle.h
         
         ${_SRC_DIR}/common/CircularBuffer.cpp
         ${_SRC_DIR}/common/Crc.cpp
@@ -46,21 +56,20 @@ add_library(
         ${_SRC_DIR}/time/Time.cpp
 )
 
-set_target_cpp_standard(${PROJECT_NAME} 20)
-enable_target_warnings(${PROJECT_NAME})
-set_target_visibility(${PROJECT_NAME})
-
-set_target_properties(
-    ${PROJECT_NAME}
-    PROPERTIES
-        VERSION 1.0.0
-)
+add_library(utils::utils ALIAS utils)
 
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}>
+        $<INSTALL_INTERFACE:${_INC_FOLDER_NAME}>
 )
+
+set_target_cpp_standard(${PROJECT_NAME} 20)
+enable_target_warnings(${PROJECT_NAME})
+set_target_visibility(${PROJECT_NAME})
+install_and_export_target(${PROJECT_NAME} ${_INC_FOLDER_NAME})
+enable_ros_tooling_for_target(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/package.xml)
 
 #invoke include-what-you-use (if it's enabled) for the current project
 if(USE_IWYU)
@@ -69,7 +78,5 @@ endif(USE_IWYU)
 
 if(BUILD_LIKE_POSITION_INDEPENDANT_CODE)
     enable_target_position_independent_code(${PROJECT_NAME})
-endif()              
-
-
+endif()
 
