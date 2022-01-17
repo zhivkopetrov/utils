@@ -16,14 +16,14 @@
 #include "utils/Log.h"
 
 /** Print a demangled stack backtrace of the caller function */
-static void printStacktrace(const int32_t maxFrames = 127) {
-  const int32_t MAX_FRAMES_INTERNAL = maxFrames + 1;
+static void printStacktrace() {
+  constexpr auto maxStackFrames = 256;
 
   // storage array for stack trace address data
-  void *addrList[MAX_FRAMES_INTERNAL];
+  void *addrList[maxStackFrames];
 
   // retrieve current stack addresses
-  int32_t addrLen = backtrace(addrList, MAX_FRAMES_INTERNAL);
+  int32_t addrLen = backtrace(addrList, maxStackFrames);
 
   if (0 == addrLen) {
     LOGERR("Empty stack trace, possibly corrupt");
