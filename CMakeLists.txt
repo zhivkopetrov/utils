@@ -47,6 +47,7 @@ add_library(
         ${_SRC_DIR}/data_type/IntegerUtils.cpp
         ${_SRC_DIR}/data_type/StringUtils.cpp
         ${_SRC_DIR}/debug/SignalHandler.cpp
+        ${_SRC_DIR}/debug/StackTrace.cpp
         ${_SRC_DIR}/drawing/Color.cpp
         ${_SRC_DIR}/drawing/Margins.cpp
         ${_SRC_DIR}/drawing/Point.cpp

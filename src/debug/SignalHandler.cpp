@@ -4,6 +4,7 @@
 // C system headers
 
 // C++ system headers
+#include <cstdlib>
 
 // Other libraries headers
 
