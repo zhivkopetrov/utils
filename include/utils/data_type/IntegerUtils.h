@@ -16,6 +16,8 @@ class IntegerUtils {
  public:
   IntegerUtils() = delete;
 
+  static bool hasSameSign(const int32_t a, const int32_t b);
+
   /**
    * @brief the function returns the count of all digits in
    *      the passed number

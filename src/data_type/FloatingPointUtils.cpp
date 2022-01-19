@@ -10,6 +10,10 @@
 // Own components headers
 #include "utils/data_type/FloatingPoint.h"
 
+bool FloatingPointUtils::hasSameSign(const double a, const double b) {
+  return (a < 0) == (b < 0);
+}
+
 float FloatingPointUtils::kahanSummation(float* begin, const uint64_t SIZE) {
   // Beware overly-aggressive compiler optimisations!
   volatile float result = 0.0f;

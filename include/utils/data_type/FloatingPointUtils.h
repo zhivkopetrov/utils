@@ -14,6 +14,8 @@ class FloatingPointUtils {
  public:
   FloatingPointUtils() = delete;
 
+  static bool hasSameSign(const double a, const double b);
+
   //===================== START KAHAN SUMMATION ==========================
 
   /** Summary:

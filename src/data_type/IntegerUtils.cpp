@@ -9,6 +9,10 @@
 
 // Own components headers
 
+bool IntegerUtils::hasSameSign(const int32_t a, const int32_t b) {
+  return (a < 0) == (b < 0);
+}
+
 uint8_t IntegerUtils::getDigitsCount(const uint64_t number) {
   if (0 == number) {
     return 1;
