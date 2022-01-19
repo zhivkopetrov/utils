@@ -21,7 +21,7 @@ void SignalHandler::installSignal(const int32_t signalNumber) {
       signal(signalNumber, SignalHandler::sigQuitHandler);
       break;
     default:
-      LOGERR("Unknown signal installed - %d", signalNumber)
+      LOGERR("Unknown signal installed - %d", signalNumber);
       break;
   }
 }
@@ -36,5 +36,5 @@ void SignalHandler::segFaultHandler(const int32_t) {
 void SignalHandler::sigQuitHandler(const int32_t) {
   printStacktrace();
 
-  LOGR("Program stopped at SIGQUIT")
+  LOGR("Program stopped at SIGQUIT");
 }

@@ -55,7 +55,7 @@ int32_t WidgetAligner::getAlignedX(const int32_t widgetWidth,
     case WidgetAlignment::LOWER_RIGHT:
       return RIGHT_STARTING_X;
     default:
-      LOGERR("Undefined WidgetAlignment type passed !!!")
+      LOGERR("Undefined WidgetAlignment type passed !!!");
   }
 
   return INIT_INT32_VALUE;
@@ -90,7 +90,7 @@ int32_t WidgetAligner::getAlignedY(const int32_t widgetHeight,
     case WidgetAlignment::LOWER_RIGHT:
       return LOWER_STARTING_Y;
     default:
-      LOGERR("Undefined WidgetAlignment type passed !!!")
+      LOGERR("Undefined WidgetAlignment type passed !!!");
   }
 
   return INIT_INT32_VALUE;

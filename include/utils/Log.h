@@ -29,19 +29,19 @@
            ##__VA_ARGS__);                                          \
     printf(TERM_COLOR_NONE);                                        \
     fflush(stdout);                                                 \
-  } while (0);
+  } while (0)
 
 #define LOG(format, ...)                \
   do {                                  \
     printf(format "\n", ##__VA_ARGS__); \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOG_ON_SAME_LINE(format, ...) \
   do {                                \
     printf(format, ##__VA_ARGS__);    \
     fflush(stdout);                   \
-  } while (0);
+  } while (0)
 
 #define LOGG(format, ...)               \
   do {                                  \
@@ -49,7 +49,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGG_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -57,7 +57,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 #define LOGY(format, ...)               \
   do {                                  \
@@ -65,7 +65,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGY_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -73,7 +73,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 #define LOGB(format, ...)               \
   do {                                  \
@@ -81,7 +81,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGB_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -89,7 +89,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 #define LOGM(format, ...)               \
   do {                                  \
@@ -97,7 +97,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGM_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -105,7 +105,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 #define LOGC(format, ...)               \
   do {                                  \
@@ -113,7 +113,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGC_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -121,7 +121,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 #define LOGR(format, ...)               \
   do {                                  \
@@ -129,7 +129,7 @@
     printf(format "\n", ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);            \
     fflush(stdout);                     \
-  } while (0);
+  } while (0)
 
 #define LOGR_ON_SAME_LINE(format, ...) \
   do {                                 \
@@ -137,7 +137,7 @@
     printf(format, ##__VA_ARGS__);     \
     printf(TERM_COLOR_NONE);           \
     fflush(stdout);                    \
-  } while (0);
+  } while (0)
 
 // function below carry a timestamp in the beginning of the message with format
 //"%Y-%m-%d %H:%M:%S"
@@ -154,7 +154,7 @@
            __LINE__, ##__VA_ARGS__);                                   \
     printf(TERM_COLOR_NONE);                                           \
     fflush(stdout);                                                    \
-  } while (0);
+  } while (0)
 
 #define LOG_T(format, ...)                              \
   do {                                                  \
@@ -165,7 +165,7 @@
     strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info); \
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOG_ON_SAME_LINE_T(format, ...)                 \
   do {                                                  \
@@ -176,7 +176,7 @@
     strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info); \
     printf("[%s] " format, buffer, ##__VA_ARGS__);      \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGG_T(format, ...)                             \
   do {                                                  \
@@ -189,7 +189,7 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGY_T(format, ...)                             \
   do {                                                  \
@@ -202,7 +202,7 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGB_T(format, ...)                             \
   do {                                                  \
@@ -215,7 +215,7 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGM_T(format, ...)                             \
   do {                                                  \
@@ -228,7 +228,7 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGC_T(format, ...)                             \
   do {                                                  \
@@ -241,7 +241,7 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #define LOGR_T(format, ...)                             \
   do {                                                  \
@@ -254,6 +254,6 @@
     printf("[%s] " format "\n", buffer, ##__VA_ARGS__); \
     printf(TERM_COLOR_NONE);                            \
     fflush(stdout);                                     \
-  } while (0);
+  } while (0)
 
 #endif /* UTILS_LOG_H_ */
