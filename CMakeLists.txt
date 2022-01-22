@@ -39,6 +39,7 @@ add_library(
         ${_INC_DIR}/Log.h
         ${_INC_DIR}/drawing/Point.h
         ${_INC_DIR}/drawing/Rectangle.h
+        ${_INC_DIR}/rng/Rng.h
         
         ${_SRC_DIR}/common/CircularBuffer.cpp
         ${_SRC_DIR}/common/Crc.cpp
@@ -55,6 +56,7 @@ add_library(
         ${_SRC_DIR}/drawing/WidgetAligner.cpp
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
         ${_SRC_DIR}/time/Time.cpp
+        ${_SRC_DIR}/rng/Rng.cpp
 )
 
 add_library(utils::utils ALIAS utils)
