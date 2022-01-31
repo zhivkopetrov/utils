@@ -9,9 +9,9 @@
 // C system headers
 
 // C++ system headers
-#include <atomic>
 #include <condition_variable>
 #include <memory>
+#include <chrono>
 #include <mutex>
 #include <queue>
 #include <utility>
@@ -22,25 +22,27 @@
 
 // Forward Declarations
 
+struct WaitOutcome {
+  bool isShutdowned = false;
+  bool hasTimedOut = false;
+};
+
 template <typename T>
 class ThreadSafeQueue {
- public:
+public:
   // default constructor
-  ThreadSafeQueue() : _isKilled(false) {}
+  ThreadSafeQueue() = default;
 
   // forbid the move constructor and move assignment operator
   // move constructor
-  ThreadSafeQueue(const ThreadSafeQueue&& movedOther) = delete;
+  ThreadSafeQueue(const ThreadSafeQueue &&movedOther) = delete;
 
   // move assignment operator
-  ThreadSafeQueue& operator=(const ThreadSafeQueue&& movedOther) = delete;
+  ThreadSafeQueue& operator=(const ThreadSafeQueue &&movedOther) = delete;
 
   // forbid the copy constructor and copy assignment operator
-  ThreadSafeQueue(const ThreadSafeQueue& other) = delete;
-  ThreadSafeQueue& operator=(const ThreadSafeQueue& other) = delete;
-
-  // default destructor
-  ~ThreadSafeQueue() = default;
+  ThreadSafeQueue(const ThreadSafeQueue &other) = delete;
+  ThreadSafeQueue& operator=(const ThreadSafeQueue &other) = delete;
 
   /** @brief used to push new elements to the queue
    *
@@ -49,7 +51,7 @@ class ThreadSafeQueue {
    *
    *  @param T && - rvalue reference to the data that is being pushed
    * */
-  void push(T&& newData) {
+  void push(T &&newData) {
     // lock the queue
     std::unique_lock<std::mutex> lock(_mutex);
 
@@ -74,7 +76,7 @@ class ThreadSafeQueue {
    *
    *  @param const T & - reference to the data that is being pushed
    * */
-  void pushWithCopy(const T& newData) {
+  void pushWithCopy(const T &newData) {
     // lock the queue
     std::unique_lock<std::mutex> lock(_mutex);
 
@@ -94,14 +96,17 @@ class ThreadSafeQueue {
    *
    *         NOTE: if queue is empty - the thread is put to sleep with
    *               a condition variable and when new data is being pushed
-   *               into the queue - the thread is woken up again
+   *               into the queue or the timeout hits -
+   *               the thread is woken up again
    *
    *  @param T &    - reference to the value that is being popped
    *                                                       from the queue
+   *  @param const std::chrono::microseconds& - timeout to wait (60s default)
    *
-   *  @returns bool - is value successfully popped or not
+   *  @returns WaitOutcome - has success and timed out
    * */
-  bool waitAndPop(T& value) {
+  WaitOutcome waitAndPop(T &value, const std::chrono::microseconds &timeout =
+      std::chrono::microseconds(60000000)) {
     // lock the queue
     std::unique_lock<std::mutex> lock(_mutex);
 
@@ -109,13 +114,15 @@ class ThreadSafeQueue {
      *  so it is important to check the actual condition
      *  being waited for when the call to wait returns
      * */
-    while (!_isKilled && _data.empty()) {
-      _condVar.wait(lock);
-    }
+    const bool hasTimedOut = !_condVar.wait_for(lock, timeout, [this]() {
+      if (!_isShutdowned && _data.empty()) {
+        return false;
+      }
+      return true;
+    });
 
-    // user has requested shutdown
-    if (_isKilled) {
-      return false;
+    if (_isShutdowned || hasTimedOut) {
+      return WaitOutcome{_isShutdowned, hasTimedOut};
     }
 
     // acquire the data from the queue
@@ -124,7 +131,7 @@ class ThreadSafeQueue {
     // pop the 'moved' queue node
     _data.pop();
 
-    return true;
+    return WaitOutcome{};
   }
 
   /** @brief used to acquire data from the queue.
@@ -133,10 +140,12 @@ class ThreadSafeQueue {
    *               a condition variable and when new data is being pushed
    *               into the queue - the thread is woken up again
    *
-   *  @param bool - unique_ptr to the value
-   *                                  that is being popped from the queue
+   *  @param const std::chrono::microseconds& - timeout to wait (60s default)
+   *
+   *  @return - unique_ptr to the value that is being popped from the queue
    * */
-  std::unique_ptr<T> waitAndPop() {
+  std::unique_ptr<T> waitAndPop(const std::chrono::microseconds &timeout =
+      std::chrono::microseconds(60000000)) {
     // lock the queue
     std::unique_lock<std::mutex> lock(_mutex);
 
@@ -144,13 +153,15 @@ class ThreadSafeQueue {
      *  so it is important to check the actual condition
      *  being waited for when the call to wait returns
      * */
-    while (!_isKilled && _data.empty()) {
-      _condVar.wait(lock);
-    }
+    const bool hasTimedOut = !_condVar.wait_for(lock, timeout, [this]() {
+      if (!_isShutdowned && _data.empty()) {
+        return false;
+      }
+      return true;
+    });
 
-    // user has requested shutdown
-    if (_isKilled) {
-      return std::unique_ptr<T>();
+    if (_isShutdowned || hasTimedOut) {
+      return nullptr;
     }
 
     // acquire the data from the queue
@@ -169,12 +180,11 @@ class ThreadSafeQueue {
    *
    *  @param bool - pop was successful or not
    * */
-  bool tryPop(T& value) {
+  bool tryPop(T &value) {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 
-    // if queue is empty - try_pop() fails -> return false status
-    if (_data.empty()) {
+    if (_isShutdowned || _data.empty()) {
       return false;
     }
 
@@ -203,9 +213,8 @@ class ThreadSafeQueue {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 
-    // if queue is empty - try_pop() fails -> return empty qnique_ptr
-    if (_data.empty()) {
-      return std::unique_ptr<T>();
+    if (_isShutdowned || _data.empty()) {
+      return nullptr;
     }
 
     // acquire the data from the queue and pop
@@ -250,13 +259,13 @@ class ThreadSafeQueue {
     // lock the queue
     std::lock_guard<std::mutex> lock(_mutex);
 
-    _isKilled = true;
+    _isShutdowned = true;
 
     // notify all block threads that execution must be terminated
     _condVar.notify_all();
   }
 
- private:
+private:
   // the actual queue holding the data
   std::queue<T> _data;
 
@@ -269,11 +278,11 @@ class ThreadSafeQueue {
    * */
   std::condition_variable _condVar;
 
-  /** An atomic flag used to signal waiting thread that user requested
+  /** A flag used to signal waiting thread that user requested
    *  queue shutdown with ::shutdown() method (and will probably
    *  join the threads) afterwards
    *  */
-  std::atomic<bool> _isKilled;
+  bool _isShutdowned = false;
 };
 
 #endif /* UTILS_THREADSAFEQUEUE_H_ */
