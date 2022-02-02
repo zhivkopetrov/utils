@@ -6,5 +6,10 @@ endif()
 
 # This is for catkin compatibility.
 set(utils_LIBRARIES utils::utils)
-get_target_property(utils_INCLUDE_DIRS utils::utils INTERFACE_INCLUDE_DIRECTORIES)
+
+get_target_property(
+    utils_INCLUDE_DIRS
+    utils::utils
+    INTERFACE_INCLUDE_DIRECTORIES
+)
 
