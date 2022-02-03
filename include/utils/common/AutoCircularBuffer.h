@@ -26,25 +26,17 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/class/NonCopyable.h"
+#include "utils/class/NonMoveable.h"
 
 // Forward declarations
 
 template <const uint64_t size>
-class AutoCircularBuffer {
+class AutoCircularBuffer : public NonCopyable, public NonMoveable {
  public:
   AutoCircularBuffer() : _capacity(size), _readIndex(0), _writeIndex(0) {
     memset(_buf, 0, sizeof(_buf));
   }
-
-  // forbid the move constructor and move assignment operator
-  AutoCircularBuffer(AutoCircularBuffer &&movedOther);
-  AutoCircularBuffer &operator=(AutoCircularBuffer &&movedOther);
-
-  // forbid the copy constructor and copy assignment operator
-  AutoCircularBuffer(const AutoCircularBuffer &other) = delete;
-  AutoCircularBuffer &operator=(const AutoCircularBuffer &other) = delete;
-
-  ~AutoCircularBuffer() = default;
 
   /** @brief used for reading data from the CircularBuffer
    *

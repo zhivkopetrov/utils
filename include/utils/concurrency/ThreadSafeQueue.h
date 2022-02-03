@@ -19,6 +19,8 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/class/NonCopyable.h"
+#include "utils/class/NonMoveable.h"
 
 // Forward Declarations
 
@@ -28,7 +30,7 @@ struct WaitOutcome {
 };
 
 template <typename T>
-class ThreadSafeQueue {
+class ThreadSafeQueue : public NonCopyable, public NonMoveable {
 public:
   // default constructor
   ThreadSafeQueue() = default;

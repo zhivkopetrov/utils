@@ -61,6 +61,8 @@
 
 // Own components headers
 
+// Forward declarations
+
 /** @brief used to calculate 16bit CRC using CCITT standards
  *
  *  @param uint8_t *      - buffer for CRC calculation

@@ -26,6 +26,8 @@ add_library(
         ${_INC_DIR}/common/AutoCircularBuffer.h
         ${_INC_DIR}/common/CircularBuffer.h
         ${_INC_DIR}/common/Crc.h
+        ${_INC_DIR}/class/NonCopyable.h
+        ${_INC_DIR}/class/NonMoveable.h
         ${_INC_DIR}/concurrency/ThreadSafeQueue.h
         ${_INC_DIR}/data_type/EnumClassUtils.h
         ${_INC_DIR}/data_type/FloatingPoint.h

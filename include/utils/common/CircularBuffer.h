@@ -9,24 +9,17 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/class/NonCopyable.h"
 
 // Forward declarations
 
-class CircularBuffer {
+class CircularBuffer : public NonCopyable {
  public:
   CircularBuffer();
-
-  // move constructor needed for STL containers empalce_back/push_back
-  CircularBuffer(CircularBuffer &&movedOther);
-
-  // move assignment operator implementation
-  CircularBuffer &operator=(CircularBuffer &&movedOther);
-
-  // forbid the copy constructor and copy assignment operator
-  CircularBuffer(const CircularBuffer &other) = delete;
-  CircularBuffer &operator=(const CircularBuffer &other) = delete;
-
   ~CircularBuffer();
+
+  CircularBuffer(CircularBuffer&& movedOther);
+  CircularBuffer& operator=(CircularBuffer&& movedOther);
 
   /** @brief used to initialise the CircularBuffer
    *                                        with the provided capacity
