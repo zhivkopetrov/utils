@@ -32,20 +32,6 @@ struct WaitOutcome {
 template <typename T>
 class ThreadSafeQueue : public NonCopyable, public NonMoveable {
 public:
-  // default constructor
-  ThreadSafeQueue() = default;
-
-  // forbid the move constructor and move assignment operator
-  // move constructor
-  ThreadSafeQueue(const ThreadSafeQueue &&movedOther) = delete;
-
-  // move assignment operator
-  ThreadSafeQueue& operator=(const ThreadSafeQueue &&movedOther) = delete;
-
-  // forbid the copy constructor and copy assignment operator
-  ThreadSafeQueue(const ThreadSafeQueue &other) = delete;
-  ThreadSafeQueue& operator=(const ThreadSafeQueue &other) = delete;
-
   /** @brief used to push new elements to the queue
    *
    *         NOTE: push() method moves the pushed data,
