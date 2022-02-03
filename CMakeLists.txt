@@ -26,7 +26,6 @@ add_library(
         ${_INC_DIR}/common/AutoCircularBuffer.h
         ${_INC_DIR}/common/CircularBuffer.h
         ${_INC_DIR}/common/Crc.h
-        ${_INC_DIR}/common/Position.h
         ${_INC_DIR}/concurrency/ThreadSafeQueue.h
         ${_INC_DIR}/data_type/EnumClassUtils.h
         ${_INC_DIR}/data_type/FloatingPoint.h
@@ -47,7 +46,6 @@ add_library(
         
         ${_SRC_DIR}/common/CircularBuffer.cpp
         ${_SRC_DIR}/common/Crc.cpp
-        ${_SRC_DIR}/common/Position.cpp
         ${_SRC_DIR}/data_type/FloatingPointUtils.cpp
         ${_SRC_DIR}/data_type/IntegerUtils.cpp
         ${_SRC_DIR}/data_type/StringUtils.cpp
