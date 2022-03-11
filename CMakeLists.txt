@@ -8,6 +8,8 @@ project(
     VERSION 1.0.0
 )
 
+find_package(Threads REQUIRED)
+
 list(
     APPEND 
     CMAKE_MODULE_PATH 
@@ -70,6 +72,12 @@ target_include_directories(
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}>
         $<INSTALL_INTERFACE:${_INC_FOLDER_NAME}>
+)
+
+target_link_libraries(
+    ${PROJECT_NAME}
+    PUBLIC
+        Threads::Threads
 )
 
 set_target_cpp_standard(${PROJECT_NAME} 20)
