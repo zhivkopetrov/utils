@@ -65,6 +65,7 @@ add_library(
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
         ${_SRC_DIR}/time/Time.cpp
         ${_SRC_DIR}/rng/Rng.cpp
+        ${_SRC_DIR}/log/Log.cpp
 )
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
