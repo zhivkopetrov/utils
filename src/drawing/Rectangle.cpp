@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/drawing/Rectangle.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 
@@ -23,5 +21,57 @@ Rectangle::Rectangle(const Point &pos, const int32_t inputW,
     : x(pos.x), y(pos.y), w(inputW), h(inputH) {
 }
 
-const Rectangle Rectangle::ZERO(0, 0, 0, 0);
-const Rectangle Rectangle::UNDEFINED(100000, 100000, 100000, 100000);
+bool Rectangle::operator==(const Rectangle &other) const {
+  return x == other.x && y == other.y && w == other.w && h == other.h;
+}
+
+bool Rectangle::operator!=(const Rectangle &other) const {
+  return ! (*this == other);
+}
+
+Rectangle& Rectangle::operator-(const Rectangle &other) {
+  x -= other.x;
+  y -= other.y;
+  w -= other.w;
+  h -= other.w;
+
+  return *this;
+}
+
+Rectangle& Rectangle::operator-=(const Rectangle &other) {
+  x -= other.x;
+  y -= other.y;
+  w -= other.w;
+  h -= other.w;
+
+  return *this;
+}
+
+Rectangle& Rectangle::operator+(const Rectangle &other) {
+  x += other.x;
+  y += other.y;
+  w += other.w;
+  h += other.w;
+
+  return *this;
+}
+
+Rectangle& Rectangle::operator+=(const Rectangle &other) {
+  x += other.x;
+  y += other.y;
+  w += other.w;
+  h += other.w;
+
+  return *this;
+}
+
+bool Rectangle::isPointInRect(const Point &point) const {
+  return (point.x >= x) && (point.x < (x + w)) && (point.y >= y)
+         && (point.y < (y + h));
+}
+
+bool Rectangle::isPointInRect(const Point &point, const Rectangle &rect) {
+  return (point.x >= rect.x) && (point.x < (rect.x + rect.w))
+         && (point.y >= rect.y) && (point.y < (rect.y + rect.h));
+}
+

@@ -1,11 +1,9 @@
 // Corresponding header
 #include "utils/debug/StackTrace.h"
 
-// C system headers
+// System headers
 #include <cxxabi.h>
 #include <execinfo.h>
-
-// C++ system headers
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>

@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/common/CircularBuffer.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <algorithm>  //for std::min
 #include <cstring>
 
@@ -13,11 +11,9 @@
 #include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
-// default constructor
 CircularBuffer::CircularBuffer()
     : _buf(nullptr), _capacity(0), _readIndex(0), _writeIndex(0) {}
 
-// move constructor
 CircularBuffer::CircularBuffer(CircularBuffer&& movedOther) {
   // take ownership of resources
   _buf = movedOther._buf;
@@ -32,7 +28,6 @@ CircularBuffer::CircularBuffer(CircularBuffer&& movedOther) {
   movedOther._writeIndex = 0;
 }
 
-// move assignment operator
 CircularBuffer& CircularBuffer::operator=(CircularBuffer&& movedOther) {
   // check for self-assignment
   if (this != &movedOther) {
@@ -52,30 +47,29 @@ CircularBuffer& CircularBuffer::operator=(CircularBuffer&& movedOther) {
   return *this;
 }
 
-CircularBuffer::~CircularBuffer() {
-  if (_buf)  // sanity check
-  {
+CircularBuffer::~CircularBuffer() noexcept {
+  if (_buf) { // sanity check
     delete[] _buf;
     _buf = nullptr;
   }
 }
 
-int32_t CircularBuffer::init(const uint64_t capacity) {
+ErrorCode CircularBuffer::init(const uint64_t capacity) {
   if (_buf) {
     LOGERR("CircularBuffer already initialized! Will not initialize twice");
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   _buf = new uint8_t[capacity];
   if (nullptr == _buf) {
     LOGERR("Error, bad alloc for _buf");
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   _capacity = capacity;
   memset(_buf, 0, _capacity);
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
 uint64_t CircularBuffer::read(uint8_t* outData, const uint64_t bytes) {

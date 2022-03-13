@@ -1,9 +1,7 @@
 #ifndef UTILS_NONMOVEABLE_H_
 #define UTILS_NONMOVEABLE_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 

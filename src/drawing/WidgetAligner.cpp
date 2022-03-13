@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/drawing/WidgetAligner.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers
@@ -17,7 +15,7 @@ Point WidgetAligner::getPosition(const int32_t widgetWidth,
                                  const int32_t widgetHeight,
                                  const Rectangle& container,
                                  const WidgetAlignment alignment,
-                                 const Margins& padding) {
+                                 const Margin& padding) {
   const int32_t x =
       getAlignedX(widgetWidth, container.x, container.w, alignment, padding);
 
@@ -31,7 +29,7 @@ int32_t WidgetAligner::getAlignedX(const int32_t widgetWidth,
                                    const int32_t containerX,
                                    const int32_t containerW,
                                    const WidgetAlignment alignment,
-                                   const Margins& padding) {
+                                   const Margin& padding) {
   const int32_t STARTING_X = containerX + padding.left;
 
   const int32_t CENTER_STARTING_X = containerX + (containerW - widgetWidth) / 2;
@@ -65,7 +63,7 @@ int32_t WidgetAligner::getAlignedY(const int32_t widgetHeight,
                                    const int32_t containerY,
                                    const int32_t containerH,
                                    const WidgetAlignment alignment,
-                                   const Margins& padding) {
+                                   const Margin& padding) {
   const int32_t STARTING_Y = containerY + padding.top;
 
   const int32_t CENTER_STARTING_Y =

@@ -1,9 +1,7 @@
 #ifndef UTILS_FILESYSTEMUTILS_H_
 #define UTILS_FILESYSTEMUTILS_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -11,6 +9,7 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
 
 // Forward Declarations
 
@@ -29,11 +28,12 @@ public:
 
   static bool isDirectoryPresent(const std::string &dicrectoryAbsPath);
 
-  static int32_t createDirectory(const std::string &dicrectoryAbsPath);
+  static ErrorCode createDirectory(const std::string &dicrectoryAbsPath);
 
-  static int32_t createDirectoryRecursive(const std::string &dicrectoryAbsPath);
+  static ErrorCode createDirectoryRecursive(
+      const std::string &dicrectoryAbsPath);
 
-  static int32_t getAllFilesInDirectoryRecursively(
+  static ErrorCode getAllFilesInDirectoryRecursively(
       const std::string &dir,
       const std::vector<std::string> &blackListFolderNames,
       std::vector<std::string> &outFilesAbsPath);
@@ -42,7 +42,7 @@ private:
   static void parseDirectory(
       const std::string &dir,
       const std::vector<std::string> &blackListFolderNames,
-      std::vector<std::string> &outFilesAbsPath, int32_t &errCode);
+      std::vector<std::string> &outFilesAbsPath, ErrorCode &errCode);
 };
 
 #endif /* UTILS_FILESYSTEMUTILS_H_ */

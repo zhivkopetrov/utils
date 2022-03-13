@@ -38,9 +38,7 @@
 #ifndef UTILS_FLOATINGPOINT_H_
 #define UTILS_FLOATINGPOINT_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstddef>
 #if defined _MSC_VER  // may need to check your VC++ version
 typedef unsigned __int32 uint32_t;
@@ -53,6 +51,8 @@ typedef unsigned __int64 uint64_t;
 // Other libraries headers
 
 // Own components headers
+
+// Forward declarations
 
 namespace {
 template <size_t bytes>

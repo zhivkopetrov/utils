@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/rng/Rng.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 
@@ -15,11 +13,11 @@ Rng& Rng::getInstance() {
   return rng;
 }
 
-int32_t Rng::init() {
+ErrorCode Rng::init() {
   std::random_device rd;
   _generator.seed(rd());
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
 int32_t Rng::getRandomNumber(int32_t lowRange, int32_t highRange) {

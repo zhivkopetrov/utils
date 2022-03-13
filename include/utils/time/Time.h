@@ -1,15 +1,15 @@
 #ifndef UTILS_TIME_H_
 #define UTILS_TIME_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 #include <chrono>
 
 // Other libraries headers
 
 // Own components headers
+
+// Forward Declarations
 
 class Time {
 public:

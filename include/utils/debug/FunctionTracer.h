@@ -21,15 +21,15 @@
  */
 
 #if defined(DEEP_TRACING_ENABLED)
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdio>
 #include <ctime>
 
 // Other libraries headers
 
 // Own components headers
+
+// Forward declarations
 
 #define BUFF_SIZE 26
 

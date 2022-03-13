@@ -1,14 +1,14 @@
 #ifndef UTILS_ENUMCLASSUTILS_H_
 #define UTILS_ENUMCLASSUTILS_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <type_traits>
 
 // Other libraries headers
 
 // Own components headers
+
+// Forward declarations
 
 // extract value from enumeration class
 template <typename Enumeration>

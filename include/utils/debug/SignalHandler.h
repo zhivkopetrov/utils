@@ -1,15 +1,15 @@
 #ifndef UTILS_SIGNALHANDLER_H_
 #define UTILS_SIGNALHANDLER_H_
 
-// C system headers
-#include <csignal>
-
-// C++ system headers
+// System headers
 #include <cstdint>
+#include <csignal>
 
 // Other libraries header
 
 // Own components headers
+
+// Forward declarations
 
 class SignalHandler {
  public:

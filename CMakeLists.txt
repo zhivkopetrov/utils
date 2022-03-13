@@ -47,6 +47,9 @@ add_library(
         ${_INC_DIR}/Log.h
         ${_INC_DIR}/drawing/Point.h
         ${_INC_DIR}/drawing/Rectangle.h
+        ${_INC_DIR}/drawing/Color.h
+        ${_INC_DIR}/drawing/Margin.h
+        ${_INC_DIR}/drawing/WidgetAligner.h
         ${_INC_DIR}/rng/Rng.h
         
         ${_SRC_DIR}/common/CircularBuffer.cpp
@@ -57,7 +60,7 @@ add_library(
         ${_SRC_DIR}/debug/SignalHandler.cpp
         ${_SRC_DIR}/debug/StackTrace.cpp
         ${_SRC_DIR}/drawing/Color.cpp
-        ${_SRC_DIR}/drawing/Margins.cpp
+        ${_SRC_DIR}/drawing/Margin.cpp
         ${_SRC_DIR}/drawing/Point.cpp
         ${_SRC_DIR}/drawing/Rectangle.cpp
         ${_SRC_DIR}/drawing/WidgetAligner.cpp

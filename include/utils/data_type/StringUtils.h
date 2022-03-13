@@ -1,9 +1,7 @@
 #ifndef UTILS_STRINGUTILS_H_
 #define UTILS_STRINGUTILS_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 #include <string>
 #include <vector>
@@ -11,6 +9,9 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/ErrorCode.h"
+
+// Forward declarations
 
 class StringUtils {
  public:
@@ -35,9 +36,9 @@ class StringUtils {
    *                        if it's provided it will increase performance,
    *                        since std::vector.reserve() will be invoked.
    *
-   *  @returns int32_t               - error code
+   *  @returns ErrorCode               - error code
    * */
-  static int32_t extractDoublesFromString(
+  static ErrorCode extractDoublesFromString(
       const std::string& data, const std::string& delimiters,
       std::vector<double>* outDoubles,
       const uint32_t MAX_NUMBERS = MAX_NUMBERS_INTERNAL);
@@ -61,9 +62,9 @@ class StringUtils {
    *                        if it's provided it will increase performance,
    *                        since std::vector.reserve() will be invoked.
    *
-   *  @returns int32_t               - error code
+   *  @returns ErrorCode              - error code
    * */
-  static int32_t extractIntsFromString(
+  static ErrorCode extractIntsFromString(
       const std::string& data, const std::string& delimiters,
       std::vector<int32_t>* outIntegers,
       const uint32_t MAX_NUMBERS = MAX_NUMBERS_INTERNAL);

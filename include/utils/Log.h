@@ -1,16 +1,16 @@
 #ifndef UTILS_LOG_H_
 #define UTILS_LOG_H_
 
-// C system headers
+// System headers
 #include <cstdarg>
-
-// C++ system headers
 #include <cstdio>
 #include <ctime>
 
 // Other libraries headers
 
 // Own components headers
+
+// Forward Declarations
 
 namespace LogInternal {
 

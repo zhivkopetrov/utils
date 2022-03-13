@@ -1,12 +1,10 @@
 // Corresponding header
 #include "utils/file_system/FileSystemUtils.h"
 
-// C system headers
+// System headers
 #include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
-// C++ system headers
 #include <cstring>
 #include <cerrno>
 
@@ -22,19 +20,19 @@ constexpr auto buildDirName = "build";
 
 std::string FileSystemUtils::getCurrentWorkingDirectory() {
   char cwd[PATH_MAX];
-  if (nullptr != getcwd(cwd, sizeof(cwd))) {
-      return std::string(cwd);
+  if (nullptr != getcwd(cwd, sizeof (cwd))) {
+    return std::string(cwd);
   }
 
   LOGERR("getcwd() failed, Reason: %s", strerror(errno));
-  return std::string{};
+  return std::string { };
 }
 
 std::string FileSystemUtils::getRootDirectory() {
   const std::string currDir = getCurrentWorkingDirectory();
   if (currDir.empty()) {
     LOGERR("getCurrentWorkingDirectory(), returning empty result");
-    return std::string{};
+    return std::string { };
   }
 
   const size_t buildDirPos = currDir.rfind(buildDirName);
@@ -47,26 +45,25 @@ std::string FileSystemUtils::getRootDirectory() {
 }
 
 std::string FileSystemUtils::getBuildDirectory() {
-  const std::string buildDir =
-      FileSystemUtils::getRootDirectory() + buildDirName + "/";
+  const std::string buildDir = FileSystemUtils::getRootDirectory()
+      + buildDirName + "/";
   if (buildDir == buildDirName) {
     LOGERR(
-      "Error, FileSystemUtils::getRootDirectory(), returning empty result");
-    return std::string{};
+        "Error, FileSystemUtils::getRootDirectory(), returning empty result");
+    return std::string { };
   }
 
   return buildDir;
 }
 
 std::string FileSystemUtils::getFileNameFromAbsolutePath(
-      const std::string &fileAbsPath) {
+    const std::string &fileAbsPath) {
   const size_t slashPos = fileAbsPath.rfind("/");
   if (std::string::npos == slashPos) {
     return fileAbsPath; //is root dir
   }
 
-  return fileAbsPath.substr(
-      slashPos + 1, fileAbsPath.size() - slashPos - 1);
+  return fileAbsPath.substr(slashPos + 1, fileAbsPath.size() - slashPos - 1);
 }
 
 bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
@@ -84,26 +81,27 @@ bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
   return true;
 }
 
-int32_t FileSystemUtils::createDirectory(const std::string &dicrectoryAbsPath) {
+ErrorCode FileSystemUtils::createDirectory(
+    const std::string &dicrectoryAbsPath) {
   // create folder with read/write/search permissions for owner and
   // group, with read/search permissions for others
   if (-1 == mkdir(dicrectoryAbsPath.c_str(),
-                  S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
+  S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
     if (errno != EEXIST) {
       LOGERR("Error, ::mkdir() failed for directory '%s', Reason: %s",
           dicrectoryAbsPath.c_str(), strerror(errno));
-      return FAILURE;
+      return ErrorCode::FAILURE;
     }
   }
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
-int32_t FileSystemUtils::createDirectoryRecursive(
+ErrorCode FileSystemUtils::createDirectoryRecursive(
     const std::string &dicrectoryAbsPath) {
   if (dicrectoryAbsPath.size() > PATH_MAX - 1) {
-      errno = ENAMETOOLONG;
-      return FAILURE;
+    errno = ENAMETOOLONG;
+    return ErrorCode::FAILURE;
   }
 
   std::string path = dicrectoryAbsPath;
@@ -111,30 +109,30 @@ int32_t FileSystemUtils::createDirectoryRecursive(
 
   /* Iterate the string */
   for (p = &path[1]; *p; ++p) {
-      if (*p == '/') {
-          /* Temporarily truncate */
-          *p = '\0';
+    if (*p == '/') {
+      /* Temporarily truncate */
+      *p = '\0';
 
-          if (SUCCESS != FileSystemUtils::createDirectory(path)) {
-            return FAILURE;
-          }
-
-          *p = '/';
+      if (ErrorCode::SUCCESS != FileSystemUtils::createDirectory(path)) {
+        return ErrorCode::FAILURE;
       }
+
+      *p = '/';
+    }
   }
 
-  if (SUCCESS != FileSystemUtils::createDirectory(path)) {
-    return FAILURE;
+  if (ErrorCode::SUCCESS != FileSystemUtils::createDirectory(path)) {
+    return ErrorCode::FAILURE;
   }
 
-  return 0;
+  return ErrorCode::SUCCESS;
 }
 
-int32_t FileSystemUtils::getAllFilesInDirectoryRecursively(
-      const std::string& dir,
-      const std::vector<std::string> &blackListFolderNames,
-      std::vector<std::string> &outFilesAbsPath) {
-  int32_t err = SUCCESS;
+ErrorCode FileSystemUtils::getAllFilesInDirectoryRecursively(
+    const std::string &dir,
+    const std::vector<std::string> &blackListFolderNames,
+    std::vector<std::string> &outFilesAbsPath) {
+  auto err = ErrorCode::SUCCESS;
   parseDirectory(dir, blackListFolderNames, outFilesAbsPath, err);
   return err;
 }
@@ -142,22 +140,22 @@ int32_t FileSystemUtils::getAllFilesInDirectoryRecursively(
 void FileSystemUtils::parseDirectory(
     const std::string &dir,
     const std::vector<std::string> &blackListFolderNames,
-    std::vector<std::string> &outFilesAbsPath, int32_t &errCode) {
+    std::vector<std::string> &outFilesAbsPath, ErrorCode &errCode) {
 
-  if (SUCCESS != errCode) {
+  if (ErrorCode::SUCCESS != errCode) {
     return;
   }
 
-  DIR* currentDir = nullptr;
+  DIR *currentDir = nullptr;
 
   currentDir = opendir(dir.c_str());
   if (nullptr == currentDir) {
     LOGERR("Error in opendir(%s), reason: %s", dir.c_str(), strerror(errno));
-    errCode = FAILURE;
+    errCode = ErrorCode::FAILURE;
   }
 
-  if (SUCCESS == errCode) {
-    struct dirent* dirP = nullptr;
+  if (ErrorCode::SUCCESS == errCode) {
+    struct dirent *dirP = nullptr;
     std::string filePath = "";
 
     while (nullptr != (dirP = readdir(currentDir))) {
@@ -183,8 +181,8 @@ void FileSystemUtils::parseDirectory(
           }
         }
         if (!shouldSkipDirectory) {
-          parseDirectory(
-              filePath, blackListFolderNames, outFilesAbsPath, errCode);
+          parseDirectory(filePath, blackListFolderNames, outFilesAbsPath,
+              errCode);
         }
 
         continue;
@@ -195,10 +193,9 @@ void FileSystemUtils::parseDirectory(
     }
   }
 
-  if (SUCCESS != closedir(currentDir)) {
+  if (EXIT_SUCCESS != closedir(currentDir)) {
     LOGERR("Error in closedir(), reason: %s", strerror(errno));
-    errCode = FAILURE;
+    errCode = ErrorCode::FAILURE;
   }
 }
-
 

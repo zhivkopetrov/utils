@@ -1,22 +1,21 @@
 #ifndef UTILS_CIRCULARBUFFER_H_
 #define UTILS_CIRCULARBUFFER_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers
 
 // Own components headers
 #include "utils/class/NonCopyable.h"
+#include "utils/ErrorCode.h"
 
 // Forward declarations
 
 class CircularBuffer : public NonCopyable {
  public:
   CircularBuffer();
-  ~CircularBuffer();
+  ~CircularBuffer() noexcept;
 
   CircularBuffer(CircularBuffer&& movedOther);
   CircularBuffer& operator=(CircularBuffer&& movedOther);
@@ -29,7 +28,7 @@ class CircularBuffer : public NonCopyable {
    *         NOTE: keep in mind that once created with provided capacity,
    *               the circular buffer can not be resized.
    * */
-  int32_t init(const uint64_t capacity = DEFAULT_CIRCULAR_BUFFER_SIZE);
+  ErrorCode init(const uint64_t capacity = DEFAULT_CIRCULAR_BUFFER_SIZE);
 
   /** @brief used for reading data from the CircularBuffer
    *

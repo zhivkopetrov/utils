@@ -1,9 +1,7 @@
 #ifndef UTILS_COLOR_H_
 #define UTILS_COLOR_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers
@@ -11,19 +9,10 @@
 // Own components headers
 
 struct RGBA {
-  RGBA() { reset(); }
-
-  void reset() {
-    r = 0;
-    g = 0;
-    b = 0;
-    a = 255;
-  }
-
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-  uint8_t a;
+  uint8_t r = 0;
+  uint8_t g = 0;
+  uint8_t b = 0;
+  uint8_t a = 255;
 };
 
 class Color {
@@ -63,24 +52,24 @@ class Color {
 };
 
 namespace Colors {
-extern const Color RED;
-extern const Color GREEN;
-extern const Color BLUE;
-extern const Color BLACK;
-extern const Color WHITE;
-extern const Color GRAY;
-extern const Color CYAN;
-extern const Color MAGENTA;
-extern const Color YELLOW;
-extern const Color ORANGE;
-extern const Color PURPLE;
-extern const Color DARK_GREEN;
-extern const Color CARAMEL_GOLD;
-extern const Color FULL_TRANSPARENT;
-extern const Color FIRE;
-extern const Color SMOKE;
-extern const Color ICE;
-extern const Color LIGHTNING;
+inline const Color RED(255, 0, 0, 255);
+inline const Color GREEN(0, 255, 0, 255);
+inline const Color BLUE(0, 0, 255, 255);
+inline const Color BLACK(0, 0, 0, 255);
+inline const Color WHITE(255, 255, 255, 255);
+inline const Color GRAY(192, 192, 192, 255);
+inline const Color CYAN(0, 255, 255, 255);
+inline const Color MAGENTA(255, 0, 255, 255);
+inline const Color YELLOW(255, 255, 0, 255);
+inline const Color ORANGE(255, 128, 0, 255);
+inline const Color PURPLE(128, 0, 128, 255);
+inline const Color DARK_GREEN(6, 65, 14, 255);
+inline const Color CARAMEL_GOLD(254, 213, 151, 255);
+inline const Color FULL_TRANSPARENT(0, 0, 0, 0);
+inline const Color FIRE(226, 88, 34, 0);
+inline const Color SMOKE(105, 105, 105, 0);
+inline const Color ICE(212, 239, 235, 0);
+inline const Color LIGHTNING(192, 192, 192, 0);
 }  // namespace Colors
 
 #endif /* UTILS_COLOR_H_ */

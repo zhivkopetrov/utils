@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/debug/SignalHandler.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdlib>
 
 // Other libraries headers
@@ -31,7 +29,7 @@ void SignalHandler::segFaultHandler(const int32_t) {
   LOG("Received signal SIGSEGV, Segmentation fault. Printing stack trace:");
   printStacktrace();
 
-  exit(FAILURE);
+  exit(EXIT_FAILURE);
 }
 
 void SignalHandler::sigQuitHandler(const int32_t) {

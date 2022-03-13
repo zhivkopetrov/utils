@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/data_type/FloatingPointUtils.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 

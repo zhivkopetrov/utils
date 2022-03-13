@@ -1,21 +1,22 @@
 #ifndef UTILS_RNG_H_
 #define UTILS_RNG_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <random>
 
 // Other libraries header
 
 // Own components headers
+#include "utils/ErrorCode.h"
+
+// Forward Declarations
 
 class Rng {
 public:
   static Rng& getInstance();
 
   //used to seed the Rng
-  int32_t init();
+  ErrorCode init();
 
   // get uniformly distributed number in the range [logRange - highRange]
   int32_t getRandomNumber(int32_t lowRange, int32_t highRange);

@@ -52,9 +52,7 @@
 // Corresponding header
 #include "utils/common/Crc.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 

@@ -1,9 +1,7 @@
 #ifndef UTILS_POINT_H_
 #define UTILS_POINT_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers
@@ -17,45 +15,20 @@ struct Point {
 
   Point(const int32_t inputX, const int32_t inputY);
 
-  bool operator==(const Point& other) const {
-    return x == other.x && y == other.y;
-  }
-
-  bool operator!=(const Point& other) const { return !(*this == other); }
-
-  Point& operator+(const Point& other) {
-    x += other.x;
-    y += other.y;
-
-    return *this;
-  }
-
-  Point& operator+=(const Point& other) {
-    x += other.x;
-    y += other.y;
-
-    return *this;
-  }
-
-  Point& operator-(const Point& other) {
-    x -= other.x;
-    y -= other.y;
-
-    return *this;
-  }
-
-  Point& operator-=(const Point& other) {
-    x -= other.x;
-    y -= other.y;
-
-    return *this;
-  }
+  bool operator==(const Point& other) const;
+  bool operator!=(const Point& other) const;
+  Point& operator+(const Point& other);
+  Point& operator+=(const Point& other);
+  Point& operator-(const Point& other);
+  Point& operator-=(const Point& other);
 
   int32_t x;
   int32_t y;
-
-  static const Point ZERO;
-  static const Point UNDEFINED;
 };
+
+namespace Points {
+inline const Point ZERO(0, 0);
+inline const Point UNDEFINED(100000, 100000);
+} //namespace Points
 
 #endif /* UTILS_POINT_H_ */

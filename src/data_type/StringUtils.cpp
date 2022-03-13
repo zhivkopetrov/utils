@@ -1,9 +1,7 @@
 // Corresponding header
 #include "utils/data_type/StringUtils.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cctype>
 #include <sstream>
 
@@ -13,10 +11,10 @@
 #include "utils/ErrorCode.h"
 #include "utils/Log.h"
 
-int32_t StringUtils::extractIntsFromString(const std::string& data,
-                                           const std::string& delimiters,
-                                           std::vector<int32_t>* outIntegers,
-                                           const uint32_t MAX_NUMBERS) {
+ErrorCode StringUtils::extractIntsFromString(const std::string &data,
+                                             const std::string &delimiters,
+                                             std::vector<int32_t> *outIntegers,
+                                             const uint32_t MAX_NUMBERS) {
   std::vector<std::string> tokens;
 
   // if maximum number is provided do reserve for increase in performance
@@ -32,7 +30,7 @@ int32_t StringUtils::extractIntsFromString(const std::string& data,
 
   if (0 == tokens.size()) {
     LOGERR("Error, empty string data provided -> no tokenize is possible");
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   const uint32_t TOKENS_SIZE = static_cast<uint32_t>(tokens.size());
@@ -51,13 +49,13 @@ int32_t StringUtils::extractIntsFromString(const std::string& data,
     }
   }
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
-int32_t StringUtils::extractDoublesFromString(const std::string& data,
-                                              const std::string& delimiters,
-                                              std::vector<double>* outDoubles,
-                                              const uint32_t MAX_NUMBERS) {
+ErrorCode StringUtils::extractDoublesFromString(const std::string &data,
+                                                const std::string &delimiters,
+                                                std::vector<double> *outDoubles,
+                                                const uint32_t MAX_NUMBERS) {
   std::vector<std::string> tokens;
 
   // if maximum number is provided do reserve for increase in performance
@@ -73,7 +71,7 @@ int32_t StringUtils::extractDoublesFromString(const std::string& data,
 
   if (0 == tokens.size()) {
     LOGERR("Error, empty string data provided -> no tokenize is possible");
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   const uint32_t TOKENS_SIZE = static_cast<uint32_t>(tokens.size());
@@ -92,12 +90,12 @@ int32_t StringUtils::extractDoublesFromString(const std::string& data,
     }
   }
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
-void StringUtils::tokenize(const std::string& data,
-                           const std::string& delimiters,
-                           std::vector<std::string>* outTokens,
+void StringUtils::tokenize(const std::string &data,
+                           const std::string &delimiters,
+                           std::vector<std::string> *outTokens,
                            const uint32_t MAX_NUMBERS) {
   // if maximum number is provided do reserve for increase in performance
   if (MAX_NUMBERS_INTERNAL != MAX_NUMBERS) {
@@ -120,7 +118,7 @@ void StringUtils::tokenize(const std::string& data,
   }
 }
 
-int32_t StringUtils::safeStoi(const std::string& data) {
+int32_t StringUtils::safeStoi(const std::string &data) {
   const uint32_t DATA_SIZE = static_cast<uint32_t>(data.size());
 
   // check is string is not empty
@@ -128,7 +126,7 @@ int32_t StringUtils::safeStoi(const std::string& data) {
     if (!isdigit(data[0])) {
       // check if it starts with a sign symbol
       // if yes -> check if it has any digits behind it
-      if (!(DATA_SIZE > 1 && (('-' == data[0]) || ('+' == data[0])))) {
+      if (! (DATA_SIZE > 1 && ( ('-' == data[0]) || ('+' == data[0])))) {
         LOGERR("Warning, data: [%s] is not in numerical format -> stoi will "
                "return result 0: %d", data.c_str(), 0);
         return 0;
@@ -138,11 +136,8 @@ int32_t StringUtils::safeStoi(const std::string& data) {
 
   for (uint32_t i = 1; i < DATA_SIZE; ++i) {
     if (!isdigit(data[i])) {
-      LOGERR(
-          "Warning, data: [%s] is not in numerical format ->"
-          "stoi will return result 0: %d",
-          data.c_str(), 0);
-
+      LOGERR("Warning, data: [%s] is not in numerical format ->"
+             "stoi will return result 0: %d", data.c_str(), 0);
       return 0;
     }
   }
@@ -150,7 +145,7 @@ int32_t StringUtils::safeStoi(const std::string& data) {
   return std::stoi(data);
 }
 
-double StringUtils::safeStod(const std::string& data) {
+double StringUtils::safeStod(const std::string &data) {
   const uint32_t DATA_SIZE = static_cast<uint32_t>(data.size());
 
   // check is string is not empty
@@ -158,7 +153,7 @@ double StringUtils::safeStod(const std::string& data) {
     if (!isdigit(data[0])) {
       // check if it starts with a sign symbol
       // if yes -> check if it has any digits behind it
-      if (!(DATA_SIZE > 1 && (('-' == data[0]) || ('+' == data[0])))) {
+      if (! (DATA_SIZE > 1 && ( ('-' == data[0]) || ('+' == data[0])))) {
         LOGERR("Warning, data: [%s] is not in numerical format -> stod will "
                "return result 0: %d", data.c_str(), 0);
         return 0;
@@ -177,7 +172,7 @@ double StringUtils::safeStod(const std::string& data) {
       }
 
       LOGERR("Warning, data: [%s] is not in numerical format -> stod will "
-             "return result 0: %d", data.c_str(), 0);
+          "return result 0: %d", data.c_str(), 0);
       return 0;
     }
   }

@@ -1,16 +1,17 @@
 #ifndef UTILS_ERRORCODE_H_
 #define UTILS_ERRORCODE_H_
 
-// C system headers
-
-// C++ system headers
-#include <cstdint>
+// System headers
 
 // Other libraries header
 
 // Own components headers
 
-inline constexpr int32_t SUCCESS = 0;
-inline constexpr int32_t FAILURE = 1;
+// Forward Declarations
+
+enum class ErrorCode {
+  SUCCESS,
+  FAILURE
+};
 
 #endif /* UTILS_ERRORCODE_H_ */

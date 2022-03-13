@@ -1,9 +1,7 @@
 #ifndef UTILS_INTEGERUTILS_H_
 #define UTILS_INTEGERUTILS_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers

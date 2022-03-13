@@ -6,9 +6,7 @@
 #ifndef UTILS_THREADSAFEQUEUE_H_
 #define UTILS_THREADSAFEQUEUE_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <condition_variable>
 #include <memory>
 #include <chrono>

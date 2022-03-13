@@ -20,7 +20,7 @@ class IniFileParser {
 public:
   IniFileParser() = delete;
 
-  static int32_t parseFile(std::string_view file, IniFileData &outData);
+  static ErrorCode parseFile(std::string_view file, IniFileData &outData);
 
   static bool getKeyValueInt(const IniFileSection &section,
                              const std::string &identifier, int32_t &outValue);

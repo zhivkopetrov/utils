@@ -1,9 +1,7 @@
 // Corresponding .h file
 #include "utils/data_type/IntegerUtils.h"
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 

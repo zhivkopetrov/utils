@@ -1,14 +1,12 @@
 #ifndef UTILS_WIDGETALIGNER_H
 #define UTILS_WIDGETALIGNER_H
 
-// C system headers
-
-// C++ system headers
+// System headers
 
 // Other libraries headers
 
 // Own components headers
-#include "utils/drawing/Margins.h"
+#include "utils/drawing/Margin.h"
 #include "utils/drawing/Point.h"
 
 // Forward declarations
@@ -41,7 +39,7 @@ class WidgetAligner {
                            const int32_t widgetHeight,
                            const Rectangle& container,
                            const WidgetAlignment alignment,
-                           const Margins& padding = Margins::ZERO);
+                           const Margin& padding = Margins::ZERO);
 
   /**
    * @brief Gets aligned X coordinates of a ButtonBase object by a passed
@@ -50,12 +48,12 @@ class WidgetAligner {
   static int32_t getAlignedX(const int32_t widgetWidth,
                              const int32_t containerX, const int32_t containerW,
                              const WidgetAlignment alignment,
-                             const Margins& padding = Margins::ZERO);
+                             const Margin& padding = Margins::ZERO);
 
   static int32_t getAlignedY(const int32_t widgetHeight,
                              const int32_t containerY, const int32_t containerH,
                              const WidgetAlignment alignment,
-                             const Margins& padding = Margins::ZERO);
+                             const Margin& padding = Margins::ZERO);
 };
 
 #endif  // UTILS_WIDGETALIGNER_H

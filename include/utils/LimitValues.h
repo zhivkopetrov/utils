@@ -18,6 +18,8 @@
 
 // Own components headers
 
+// Forward Declarations
+
 #define INIT_INT8_VALUE std::numeric_limits<int8_t>::max()
 #define INIT_INT16_VALUE std::numeric_limits<int16_t>::max()
 #define INIT_INT32_VALUE std::numeric_limits<int32_t>::max()

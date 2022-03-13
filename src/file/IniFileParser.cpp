@@ -11,19 +11,19 @@
 #include "utils/Log.h"
 
 namespace {
-int32_t validate(std::string_view file, std::ifstream &outStream) {
+ErrorCode validate(std::string_view file, std::ifstream &outStream) {
   if (std::string_view::npos == file.rfind(".ini")) {
     LOGERR("Error, file: [%s] is missing .ini extension", file.data());
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   outStream.open(file.data(), std::ios_base::in | std::ios_base::binary);
   if (!outStream) {
     LOGERR("Error, file: [%s] could not be opened", file.data());
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
 std::string_view trim(const std::string &line) {
@@ -75,12 +75,12 @@ bool parseValueFloat(const std::string &keyStr, float &outValue) {
 }
 } //end anonymous namespace
 
-int32_t IniFileParser::parseFile(std::string_view file, IniFileData &outData) {
+ErrorCode IniFileParser::parseFile(std::string_view file, IniFileData &outData) {
   std::ifstream fileStream;
   const auto err = validate(file, fileStream);
-  if (SUCCESS != err) {
+  if (ErrorCode::SUCCESS != err) {
     LOGERR("Error, validate failed for file: [%s]", file.data());
-    return FAILURE;
+    return ErrorCode::FAILURE;
   }
 
   std::string rawLine;
@@ -107,7 +107,7 @@ int32_t IniFileParser::parseFile(std::string_view file, IniFileData &outData) {
       const auto closeIdx = line.find(']');
       if (std::string_view::npos == closeIdx) {
         LOGERR("Error, section is missing closing ']' on line: %d", lineNumber);
-        return FAILURE;
+        return ErrorCode::FAILURE;
       }
 
       const auto sectionName = line.substr(1, closeIdx - 1);
@@ -124,7 +124,7 @@ int32_t IniFileParser::parseFile(std::string_view file, IniFileData &outData) {
     const auto eqIdx = line.find('=');
     if (std::string_view::npos == eqIdx) {
       LOGERR("key missing '=' on line: %d", lineNumber);
-      return FAILURE;
+      return ErrorCode::FAILURE;
     }
 
     currSection.insert(
@@ -135,7 +135,7 @@ int32_t IniFileParser::parseFile(std::string_view file, IniFileData &outData) {
   if (!currSectionName.empty()) {
     outData[currSectionName] = std::move(currSection);
   }
-  return SUCCESS;
+  return ErrorCode::SUCCESS;
 }
 
 bool IniFileParser::getKeyValueInt(const IniFileSection &section,

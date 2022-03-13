@@ -16,9 +16,7 @@
 #ifndef UTILS_AUTOCIRCULARBUFFER_H_
 #define UTILS_AUTOCIRCULARBUFFER_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <algorithm>  //for std::min
 #include <cstdint>
 #include <cstring>

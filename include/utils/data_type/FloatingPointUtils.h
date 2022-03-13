@@ -1,14 +1,14 @@
 #ifndef UTILS_FLOATINGPOINTUTILS_H_
 #define UTILS_FLOATINGPOINTUTILS_H_
 
-// C system headers
-
-// C++ system headers
+// System headers
 #include <cstdint>
 
 // Other libraries headers
 
 // Own components headers
+
+// Forward declarations
 
 class FloatingPointUtils {
  public:
