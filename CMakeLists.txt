@@ -9,13 +9,7 @@ project(
 )
 
 find_package(Threads REQUIRED)
-
-list(
-    APPEND 
-    CMAKE_MODULE_PATH 
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/find_modules
-)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_helpers/helpers.cmake)
+find_package(cmake_helpers REQUIRED)
 
 set(_INC_FOLDER_NAME include)
 set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}/${PROJECT_NAME})
