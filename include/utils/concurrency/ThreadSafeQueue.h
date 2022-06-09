@@ -251,6 +251,14 @@ public:
     _condVar.notify_all();
   }
 
+  /** @brief used to check if the queue has completed shutdown
+   * */
+  bool isShutDowned() const {
+    // lock the queue
+    std::lock_guard<std::mutex> lock(_mutex);
+    return _isShutdowned;
+  }
+
 private:
   // the actual queue holding the data
   std::queue<T> _data;
