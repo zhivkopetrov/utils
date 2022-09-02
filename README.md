@@ -26,6 +26,7 @@ target_link_libraries(
 **Usage as part of ROS(catkin) / ROS2(colcon) meta-build systems**
 - consume directly with find_package(utils) in the package CMakeLists.txt
 - Link agains your target
+- The library automatically exposes ans install it's artifacts following ROS/ROS2 structure
 - Example usage project: https://github.com/zhivkopetrov/robotics_v1
 
 
