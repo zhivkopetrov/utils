@@ -1,7 +1,8 @@
 # utils
 
 **A helper static C++ library with random trivial implementation optimized for fast compilation**
-Examples use cases
+
+Example use cases
 - Time measurements
 - Colored logging
 - Symbol visibility
