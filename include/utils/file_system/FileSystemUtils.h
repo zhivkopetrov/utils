@@ -37,12 +37,6 @@ public:
       const std::string &dir,
       const std::vector<std::string> &blackListFolderNames,
       std::vector<std::string> &outFilesAbsPath);
-
-private:
-  static void parseDirectory(
-      const std::string &dir,
-      const std::vector<std::string> &blackListFolderNames,
-      std::vector<std::string> &outFilesAbsPath, ErrorCode &errCode);
 };
 
 #endif /* UTILS_FILESYSTEMUTILS_H_ */

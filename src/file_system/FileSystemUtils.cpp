@@ -2,11 +2,7 @@
 #include "utils/file_system/FileSystemUtils.h"
 
 // System headers
-#include <unistd.h>
-#include <sys/stat.h>
-#include <dirent.h>
-#include <cstring>
-#include <cerrno>
+#include <filesystem>
 
 // Other libraries headers
 
@@ -15,17 +11,19 @@
 #include "utils/Log.h"
 
 namespace {
+namespace fs = std::filesystem;
 constexpr auto buildDirName = "build";
 }
 
 std::string FileSystemUtils::getCurrentWorkingDirectory() {
-  char cwd[PATH_MAX];
-  if (nullptr != getcwd(cwd, sizeof (cwd))) {
-    return std::string(cwd);
+  std::error_code errCode;
+  const fs::path currPath = fs::current_path(errCode);
+  if (errCode) {
+    LOGERR("filesystem::current_path() failed. Reason: %s", errCode.message().c_str());
+    return "";
   }
 
-  LOGERR("getcwd() failed, Reason: %s", strerror(errno));
-  return std::string { };
+  return currPath.string();
 }
 
 std::string FileSystemUtils::getRootDirectory() {
@@ -67,31 +65,17 @@ std::string FileSystemUtils::getFileNameFromAbsolutePath(
 }
 
 bool FileSystemUtils::isDirectoryPresent(const std::string &dicrectoryAbsPath) {
-  struct stat fileStat;
-
-  // check if directory valid
-  if (-1 == stat(dicrectoryAbsPath.c_str(), &fileStat)) {
-    return false;
-  }
-
-  if (!S_ISDIR(fileStat.st_mode)) {
-    return false;
-  }
-
-  return true;
+  return fs::exists(dicrectoryAbsPath);
 }
 
 ErrorCode FileSystemUtils::createDirectory(
     const std::string &dicrectoryAbsPath) {
-  // create folder with read/write/search permissions for owner and
-  // group, with read/search permissions for others
-  if (-1 == mkdir(dicrectoryAbsPath.c_str(),
-  S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
-    if (errno != EEXIST) {
-      LOGERR("Error, ::mkdir() failed for directory '%s', Reason: %s",
-          dicrectoryAbsPath.c_str(), strerror(errno));
+  std::error_code errCode;
+  fs::create_directory(dicrectoryAbsPath, errCode);
+  if (errCode) {
+      LOGERR("Error, filesystem::create_directory() failed for directory '%s', Reason: %s",
+             dicrectoryAbsPath.c_str(), errCode.message().c_str());
       return ErrorCode::FAILURE;
-    }
   }
 
   return ErrorCode::SUCCESS;
@@ -99,30 +83,12 @@ ErrorCode FileSystemUtils::createDirectory(
 
 ErrorCode FileSystemUtils::createDirectoryRecursive(
     const std::string &dicrectoryAbsPath) {
-  if (dicrectoryAbsPath.size() > PATH_MAX - 1) {
-    errno = ENAMETOOLONG;
-    return ErrorCode::FAILURE;
-  }
-
-  std::string path = dicrectoryAbsPath;
-  char *p = nullptr;
-
-  /* Iterate the string */
-  for (p = &path[1]; *p; ++p) {
-    if (*p == '/') {
-      /* Temporarily truncate */
-      *p = '\0';
-
-      if (ErrorCode::SUCCESS != FileSystemUtils::createDirectory(path)) {
-        return ErrorCode::FAILURE;
-      }
-
-      *p = '/';
-    }
-  }
-
-  if (ErrorCode::SUCCESS != FileSystemUtils::createDirectory(path)) {
-    return ErrorCode::FAILURE;
+  std::error_code errCode;
+  fs::create_directories(dicrectoryAbsPath, errCode);
+  if (errCode) {
+      LOGERR("Error, filesystem::create_directories() failed for directory '%s', Reason: %s",
+             dicrectoryAbsPath.c_str(), errCode.message().c_str());
+      return ErrorCode::FAILURE;
   }
 
   return ErrorCode::SUCCESS;
@@ -132,70 +98,51 @@ ErrorCode FileSystemUtils::getAllFilesInDirectoryRecursively(
     const std::string &dir,
     const std::vector<std::string> &blackListFolderNames,
     std::vector<std::string> &outFilesAbsPath) {
-  auto err = ErrorCode::SUCCESS;
-  parseDirectory(dir, blackListFolderNames, outFilesAbsPath, err);
-  return err;
-}
+  std::error_code errCode;
+  std::string currEntryStr;
 
-void FileSystemUtils::parseDirectory(
-    const std::string &dir,
-    const std::vector<std::string> &blackListFolderNames,
-    std::vector<std::string> &outFilesAbsPath, ErrorCode &errCode) {
+  for (const fs::directory_entry& dirEntry : 
+        fs::recursive_directory_iterator(dir)) {
+    currEntryStr = dirEntry.path().string();
 
-  if (ErrorCode::SUCCESS != errCode) {
-    return;
-  }
-
-  DIR *currentDir = nullptr;
-
-  currentDir = opendir(dir.c_str());
-  if (nullptr == currentDir) {
-    LOGERR("Error in opendir(%s), reason: %s", dir.c_str(), strerror(errno));
-    errCode = ErrorCode::FAILURE;
-  }
-
-  if (ErrorCode::SUCCESS == errCode) {
-    struct dirent *dirP = nullptr;
-    std::string filePath = "";
-
-    while (nullptr != (dirP = readdir(currentDir))) {
-      // Skip current object if it is this directory or parent directory
-      if (!strncmp(dirP->d_name, ".", 1) || !strncmp(dirP->d_name, "..", 2)) {
-        continue;
-      }
-
-      // Constructing absolute file path
-      filePath = dir;
-      if (dir[dir.size() - 1] != '/') {
-        filePath.append("/");
-      }
-      filePath.append(dirP->d_name);
-
-      if (isDirectoryPresent(filePath)) {
-        bool shouldSkipDirectory = false;
-
-        for (const auto &dirName : blackListFolderNames) {
-          if (std::string::npos != filePath.rfind(dirName)) {
-            //skip the black listed directory
-            shouldSkipDirectory = true;
-          }
-        }
-        if (!shouldSkipDirectory) {
-          parseDirectory(filePath, blackListFolderNames, outFilesAbsPath,
-              errCode);
-        }
-
-        continue;
-      }
-
-      // Here we are located on the leaf folder nodes (leaf files)
-      outFilesAbsPath.emplace_back(filePath);
+    const bool isDirectory = dirEntry.is_directory(errCode);
+    if (errCode) {
+      LOGERR("Error, filesystem::is_directory() failed for directory '%s', Reason: %s",
+        currEntryStr.c_str(), errCode.message().c_str());
+      return ErrorCode::FAILURE;
     }
+    
+    if (isDirectory) {
+      for (const auto &blackListDirName : blackListFolderNames) {
+        const bool found = std::string::npos != blackListDirName.rfind(currEntryStr);
+        if (found) {
+          //skip the black listed directory
+          continue;
+        }
+      }
+    }
+
+    const bool isRegularFile = dirEntry.is_regular_file(errCode);
+    if (errCode) {
+      LOGERR("Error, filesystem::is_regular_file() failed for directory '%s', Reason: %s",
+        currEntryStr.c_str(), errCode.message().c_str());
+      return ErrorCode::FAILURE;
+    }
+
+    const bool isSymlink = dirEntry.is_symlink(errCode);
+    if (errCode) {
+      LOGERR("Error, filesystem::is_symlink() failed for directory '%s', Reason: %s",
+        currEntryStr.c_str(), errCode.message().c_str());
+      return ErrorCode::FAILURE;
+    }
+
+    //skip if not regular file
+    if (!isRegularFile || isSymlink) {
+      continue;
+    }
+
+    outFilesAbsPath.emplace_back(currEntryStr);
   }
 
-  if (EXIT_SUCCESS != closedir(currentDir)) {
-    LOGERR("Error in closedir(), reason: %s", strerror(errno));
-    errCode = ErrorCode::FAILURE;
-  }
+  return ErrorCode::SUCCESS;
 }
-
