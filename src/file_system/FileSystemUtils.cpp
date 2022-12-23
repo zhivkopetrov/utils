@@ -13,6 +13,12 @@
 namespace {
 namespace fs = std::filesystem;
 constexpr auto buildDirName = "build";
+
+#ifdef __linux__
+constexpr auto SLASH_IDENTIFIER = '/';
+#else
+constexpr auto SLASH_IDENTIFIER = '\\';
+#endif
 }
 
 std::string FileSystemUtils::getCurrentWorkingDirectory() {
@@ -36,7 +42,7 @@ std::string FileSystemUtils::getRootDirectory() {
   const size_t buildDirPos = currDir.rfind(buildDirName);
   //build not found -> this means cwd is in top level (above build)
   if (std::string::npos == buildDirPos) {
-    return currDir + "/";
+    return currDir + SLASH_IDENTIFIER;
   }
 
   return currDir.substr(0, buildDirPos);
@@ -44,7 +50,7 @@ std::string FileSystemUtils::getRootDirectory() {
 
 std::string FileSystemUtils::getBuildDirectory() {
   const std::string buildDir = FileSystemUtils::getRootDirectory()
-      + buildDirName + "/";
+      + buildDirName + SLASH_IDENTIFIER;
   if (buildDir == buildDirName) {
     LOGERR(
         "Error, FileSystemUtils::getRootDirectory(), returning empty result");
@@ -56,7 +62,7 @@ std::string FileSystemUtils::getBuildDirectory() {
 
 std::string FileSystemUtils::getFileNameFromAbsolutePath(
     const std::string &fileAbsPath) {
-  const size_t slashPos = fileAbsPath.rfind("/");
+  const size_t slashPos = fileAbsPath.rfind(SLASH_IDENTIFIER);
   if (std::string::npos == slashPos) {
     return fileAbsPath; //is root dir
   }

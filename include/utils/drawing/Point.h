@@ -27,8 +27,8 @@ struct Point {
 };
 
 namespace Points {
-inline const Point ZERO(0, 0);
-inline const Point UNDEFINED(100000, 100000);
+inline const struct Point ZERO(0, 0);
+inline const struct Point UNDEFINED(100000, 100000);
 } //namespace Points
 
 #endif /* UTILS_POINT_H_ */

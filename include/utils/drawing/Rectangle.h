@@ -53,8 +53,8 @@ struct Rectangle {
 };
 
 namespace Rectangles {
-const Rectangle ZERO(0, 0, 0, 0);
-const Rectangle UNDEFINED(100000, 100000, 100000, 100000);
+inline const struct Rectangle ZERO(0, 0, 0, 0);
+inline const struct Rectangle UNDEFINED(100000, 100000, 100000, 100000);
 } //namespace Rectangles
 
 #endif /* UTILS_RECTANGLE_H_ */

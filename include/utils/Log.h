@@ -2,6 +2,7 @@
 #define UTILS_LOG_H_
 
 // System headers
+#include <cinttypes>
 #include <cstdarg>
 #include <cstdio>
 #include <ctime>
