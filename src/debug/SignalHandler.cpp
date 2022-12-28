@@ -16,10 +16,10 @@ void SignalHandler::installSignal(const int32_t signalNumber) {
     case SIGSEGV:
       signal(signalNumber, SignalHandler::segFaultHandler);
       break;
-#if __linux__
-    case SIGQUIT:
-#else
+#if defined(_WIN32) || defined(_WIN64)
     case SIGBREAK:
+#else
+    case SIGQUIT:
 #endif
       signal(signalNumber, SignalHandler::sigQuitHandler);
       break;

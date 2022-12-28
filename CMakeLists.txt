@@ -9,7 +9,11 @@ project(
 )
 
 find_package(cmake_helpers REQUIRED)
-find_package(Threads REQUIRED)
+
+# workaround problematic pthread support for emscripten
+if(NOT EMSCRIPTEN)
+    find_package(Threads REQUIRED)
+endif()
 
 set(_INC_FOLDER_NAME include)
 set(_INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${_INC_FOLDER_NAME}/${PROJECT_NAME})
@@ -76,11 +80,16 @@ target_include_directories(
         $<INSTALL_INTERFACE:${_INC_FOLDER_NAME}>
 )
 
-target_link_libraries(
-    ${PROJECT_NAME}
-    PUBLIC
-        Threads::Threads
-)
+# workaround problematic pthread support for emscripten
+if(NOT EMSCRIPTEN)
+    target_link_libraries(
+        ${PROJECT_NAME}
+        PUBLIC
+            Threads::Threads
+    )
+endif()
+
+
 
 if(NOT DISABLE_ROS_TOOLING)
     # Ament uses non-monolith build (separate build and install steps).
