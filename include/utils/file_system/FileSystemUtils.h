@@ -17,6 +17,11 @@ class FileSystemUtils {
 public:
   FileSystemUtils() = delete;
 
+  enum class SymLinkAcceptance {
+    ALLOWED,
+    DISALLOWED
+  };
+
   static std::string getCurrentWorkingDirectory();
 
   static std::string getRootDirectory();
@@ -36,6 +41,7 @@ public:
   static ErrorCode getAllFilesInDirectoryRecursively(
       const std::string &dir,
       const std::vector<std::string> &blackListFolderNames,
+      SymLinkAcceptance symLinkAcceptance,
       std::vector<std::string> &outFilesAbsPath);
 };
 

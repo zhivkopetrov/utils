@@ -103,6 +103,7 @@ ErrorCode FileSystemUtils::createDirectoryRecursive(
 ErrorCode FileSystemUtils::getAllFilesInDirectoryRecursively(
     const std::string &dir,
     const std::vector<std::string> &blackListFolderNames,
+    SymLinkAcceptance symLinkAcceptance,
     std::vector<std::string> &outFilesAbsPath) {
   std::error_code errCode;
   std::string currEntryStr;
@@ -135,6 +136,10 @@ ErrorCode FileSystemUtils::getAllFilesInDirectoryRecursively(
       return ErrorCode::FAILURE;
     }
 
+    if (!isRegularFile) {
+      continue;
+    }
+
     const bool isSymlink = dirEntry.is_symlink(errCode);
     if (errCode) {
       LOGERR("Error, filesystem::is_symlink() failed for directory '%s', Reason: %s",
@@ -142,11 +147,11 @@ ErrorCode FileSystemUtils::getAllFilesInDirectoryRecursively(
       return ErrorCode::FAILURE;
     }
 
-    //skip if not regular file
-    if (!isRegularFile || isSymlink) {
+    if ((SymLinkAcceptance::DISALLOWED == symLinkAcceptance) && isSymlink) {
       continue;
     }
 
+    // regular file or symlink
     outFilesAbsPath.emplace_back(currEntryStr);
   }
 
