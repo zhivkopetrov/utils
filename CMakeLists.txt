@@ -38,6 +38,7 @@ add_library(
         ${_INC_DIR}/debug/SignalHandler.h
         ${_INC_DIR}/debug/StackTrace.h
         ${_INC_DIR}/debug/StrError.h
+        ${_INC_DIR}/design_pattern/StateMachine.h
         ${_INC_DIR}/file/IniFileParser.h
         ${_INC_DIR}/file_system/FileSystemUtils.h
         ${_INC_DIR}/time/Time.h
@@ -59,6 +60,7 @@ add_library(
         ${_SRC_DIR}/debug/SignalHandler.cpp
         ${_SRC_DIR}/debug/StackTrace.cpp
         ${_SRC_DIR}/debug/StrError.cpp
+        ${_SRC_DIR}/design_pattern/StateMachine.cpp
         ${_SRC_DIR}/drawing/Color.cpp
         ${_SRC_DIR}/drawing/Margin.cpp
         ${_SRC_DIR}/drawing/Point.cpp
