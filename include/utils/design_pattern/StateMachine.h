@@ -41,6 +41,10 @@ public:
 
   void shutdown();
 
+  //stars the state machine with one of the available states
+  //returns error if state is not registered
+  ErrorCode start(const std::string& name);
+
   //returns error if state is already present
   ErrorCode addState(const StateDescription& stateDescription);
 

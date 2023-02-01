@@ -31,8 +31,25 @@ ErrorCode StateMachine::init(StateLogging status,
 }
 
 void StateMachine::shutdown() {
-  LOG("StateMachine: Shutting down");
+  LOG_T("StateMachine: Shutting down");
   _isShutdowned = true;
+}
+
+ErrorCode StateMachine::start(const std::string& name) {
+  auto it = _states.find(name);
+  if (it == _states.end()) {
+    LOGERR("State [%s] is not registed in the StateMachine", name.c_str());
+    return ErrorCode::FAILURE;
+  }
+
+  _currState = &it->second;
+  if (StateLogging::ENABLED == _stateLogging) {
+    LOGG_T("StateMachine: Successfully starting in state [%s] ", 
+        _currState->stateDescription.name.c_str());
+  }
+
+  _currState->stateDescription.onEnter();
+  return ErrorCode::SUCCESS;
 }
 
 ErrorCode StateMachine::addState(const StateDescription& stateDescription) {
@@ -90,37 +107,42 @@ ErrorCode StateMachine::addStateTransitions(
 
 ErrorCode StateMachine::changeState(const std::string& name) {
   if (_isShutdowned) {
-    LOGR("StateMachine: is already shutdowned. "
+    LOGR_T("StateMachine: is already shutdowned. "
          "Discarding request for ::changeState(%s)", name.c_str());
+    return ErrorCode::FAILURE;
+  }
+
+  if (!_currState) {
+    LOGERR_T("StateMachine: is not started. Consider calling ::start() first. "
+           "Discarding request for ::changeState(%s)", name.c_str());
     return ErrorCode::FAILURE;
   }
 
   auto it = _states.find(name);
   if (it == _states.end()) {
-    LOGERR("State [%s] is not registed in the StateMachine", name.c_str());
+    LOGERR_T("State [%s] is not registed in the StateMachine", name.c_str());
     return ErrorCode::FAILURE;
   }
 
-  //on first iteration there will be no current(present) state
-  if (_currState) {
-    //check for allowed state transition
-    if (_currState->transitions.find(name) == _currState->transitions.end()) {
-      LOGERR("Requested State [%s] not registed as TransitionState for the "
-             "current state [%s]. Discarding event", name.c_str(), 
-             _currState->stateDescription.name.c_str());
-      return ErrorCode::FAILURE;
-    }
-
-    if (StateLogging::ENABLED == _stateLogging) {
-      LOG("StateMachine: Leaving state [%s]", 
-          _currState->stateDescription.name.c_str());
-    }
-    _currState->stateDescription.onExit();
+  //check for allowed state transition
+  if (_currState->transitions.find(name) == _currState->transitions.end()) {
+    LOGERR_T("Requested State [%s] not registed as TransitionState for the "
+            "current state [%s]. Discarding event", name.c_str(), 
+            _currState->stateDescription.name.c_str());
+    return ErrorCode::FAILURE;
   }
+
+  if (StateLogging::ENABLED == _stateLogging) {
+    LOG_T("StateMachine: Leaving state [%s]", 
+        _currState->stateDescription.name.c_str());
+  }
+  _currState->stateDescription.onExit();
+
+  //change state
   _currState = &it->second;
 
   if (StateLogging::ENABLED == _stateLogging) {
-    LOG("StateMachine: Entering state [%s]", 
+    LOG_T("StateMachine: Entering state [%s]", 
         _currState->stateDescription.name.c_str());
   }
   _currState->stateDescription.onEnter();
