@@ -12,6 +12,7 @@
 #include <chrono>
 #include <mutex>
 #include <queue>
+#include <vector>
 #include <utility>
 
 // Other libraries headers
@@ -76,6 +77,30 @@ public:
 
     // notify one blocked thread
     _condVar.notify_one();
+  }
+
+  /** @brief used to push a batch of new elements to the queue
+   *
+   *
+   *  @param T && - rvalue reference to the data that is being pushed
+   * */
+  void pushBatch(const std::vector<T>& newData) {
+    // lock the queue
+    std::unique_lock<std::mutex> lock(_mutex);
+
+    // push the data to queue
+    for (const T& elem : newData) {
+      _data.push(elem);
+    }
+
+    /** Manually unlock the queue since we want to notify any threads
+     * that are waiting for data
+     * */
+    lock.unlock();
+
+    // notify all blocked threads, because in theory several threads
+    // may pick up the batched data
+    _condVar.notify_all();
   }
 
   /** @brief used to acquire data from the queue.
@@ -237,15 +262,28 @@ public:
     return _data.size();
   }
 
+  /** @brief used clear the content of the internal queue.
+   * */
+  void clear() {
+    // lock the queue
+    std::lock_guard<std::mutex> lock(_mutex);
+
+    // clear content
+    _data = std::queue<T>{};
+  }
+
   /** @brief used initiate shutdown of the queue
    *         (usually invoking of this method by the developer should be
    *          followed by joining thread producers and thread consumers)
    * */
   void shutdown() {
     // lock the queue
-    std::lock_guard<std::mutex> lock(_mutex);
+    std::unique_lock<std::mutex> lock(_mutex);
 
     _isShutdowned = true;
+
+    //unlock before notifying
+    lock.unlock();
 
     // notify all block threads that execution must be terminated
     _condVar.notify_all();
