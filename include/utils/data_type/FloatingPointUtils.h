@@ -86,7 +86,6 @@ class FloatingPointUtils {
 
   //===================== END EQUALITY FUNCTIONS =========================
 
- private:
   /** @brief used to capture bad(not of same type) input parameters
    *                                                      of the function
    * */
