@@ -1,5 +1,5 @@
-#ifndef UTILS_INIFILEPARSER_H_
-#define UTILS_INIFILEPARSER_H_
+#ifndef UTILS_INIFILEUTILS_H_
+#define UTILS_INIFILEUTILS_H_
 
 // System headers
 #include <string>
@@ -16,11 +16,15 @@
 using IniFileSection = std::unordered_map<std::string, std::string>;
 using IniFileData = std::unordered_map<std::string, IniFileSection>;
 
-class IniFileParser {
+class IniFileUtils {
 public:
-  IniFileParser() = delete;
+  IniFileUtils() = delete;
 
   static ErrorCode parseFile(std::string_view file, IniFileData &outData);
+
+  //will override filePath on each call
+  static ErrorCode serializeFile(
+    const std::string& filePath, const IniFileData &data);
 
   static bool getKeyValueInt(const IniFileSection &section,
                              const std::string &identifier, int32_t &outValue);
@@ -36,4 +40,4 @@ public:
   static void print(const IniFileData &data);
 };
 
-#endif /* UTILS_INIFILEPARSER_H_ */
+#endif /* UTILS_INIFILEUTILS_H_ */

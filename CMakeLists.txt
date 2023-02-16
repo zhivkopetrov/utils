@@ -39,7 +39,7 @@ add_library(
         ${_INC_DIR}/debug/StackTrace.h
         ${_INC_DIR}/debug/StrError.h
         ${_INC_DIR}/design_pattern/StateMachine.h
-        ${_INC_DIR}/file/IniFileParser.h
+        ${_INC_DIR}/file/IniFileUtils.h
         ${_INC_DIR}/file_system/FileSystemUtils.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/ErrorCode.h
@@ -66,7 +66,7 @@ add_library(
         ${_SRC_DIR}/drawing/Point.cpp
         ${_SRC_DIR}/drawing/Rectangle.cpp
         ${_SRC_DIR}/drawing/WidgetAligner.cpp
-        ${_SRC_DIR}/file/IniFileParser.cpp
+        ${_SRC_DIR}/file/IniFileUtils.cpp
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
         ${_SRC_DIR}/time/Time.cpp
         ${_SRC_DIR}/rng/Rng.cpp
