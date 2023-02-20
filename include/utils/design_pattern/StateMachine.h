@@ -11,16 +11,19 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/input/InputEvent.h"
 #include "utils/ErrorCode.h"
 
 // Forward declarations
 
 using StateAction = std::function<void()>;
+using HandleEvent = std::function<void(const InputEvent&)>;
 
 struct StateDescription {
   std::string name;
   StateAction onEnter;
   StateAction onExit;
+  HandleEvent handleEvent = nullptr; //optional
 };
 
 struct StateTransitions {
@@ -56,6 +59,9 @@ public:
 
   //returns error if requested transition is not possible
   ErrorCode changeState(const std::string& name);
+
+  //passes event to the current (active) state if handleEventCb is configured
+  void handleEvent(const InputEvent& e);
 
 private:
   struct StateInfo {

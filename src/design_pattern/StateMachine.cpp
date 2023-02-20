@@ -149,3 +149,16 @@ ErrorCode StateMachine::changeState(const std::string& name) {
 
   return ErrorCode::SUCCESS;
 }
+
+void StateMachine::handleEvent(const InputEvent& e) {
+  if (!_currState) {
+    LOGERR_T("StateMachine: is not started. Consider calling ::start() first. "
+             "Discarding request for ::handleEvent()");
+    return;
+  }
+
+  // process event if handleEvent callback is present for the current state
+  if (_currState->stateDescription.handleEvent) {
+    _currState->stateDescription.handleEvent(e);
+  }
+}
