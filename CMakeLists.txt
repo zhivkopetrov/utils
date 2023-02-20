@@ -41,6 +41,10 @@ add_library(
         ${_INC_DIR}/design_pattern/StateMachine.h
         ${_INC_DIR}/file/IniFileUtils.h
         ${_INC_DIR}/file_system/FileSystemUtils.h
+        ${_INC_DIR}/input/defines/EventDefines.h
+        ${_INC_DIR}/input/InputEvent.h
+        ${_INC_DIR}/input/TouchEntity.h
+        ${_INC_DIR}/input/TouchEntityInterface.h
         ${_INC_DIR}/time/Time.h
         ${_INC_DIR}/ErrorCode.h
         ${_INC_DIR}/LimitValues.h
@@ -68,6 +72,7 @@ add_library(
         ${_SRC_DIR}/drawing/WidgetAligner.cpp
         ${_SRC_DIR}/file/IniFileUtils.cpp
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
+        ${_SRC_DIR}/input/InputEvent.cpp
         ${_SRC_DIR}/time/Time.cpp
         ${_SRC_DIR}/rng/Rng.cpp
         ${_SRC_DIR}/log/Log.cpp

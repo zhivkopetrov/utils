@@ -34,7 +34,8 @@ enum StateLogging {
 
 class StateMachine {
 public:
-  //full, partial or zero initialization
+  //Full, partial or zero initialization. An alternative 'addState' method
+  //could be used to extend the state machine at run-time.
   ErrorCode init(StateLogging status,
                  const std::vector<StateDescription>& states = {},
                  const std::vector<StateTransitions>& transitions = {});
