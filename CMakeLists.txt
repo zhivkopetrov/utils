@@ -40,6 +40,8 @@ add_library(
         ${_INC_DIR}/debug/StrError.h
         ${_INC_DIR}/design_pattern/StateMachine.h
         ${_INC_DIR}/file/IniFileUtils.h
+        ${_INC_DIR}/file/PpmDefines.h
+        ${_INC_DIR}/file/PpmFileHandler.h
         ${_INC_DIR}/file_system/FileSystemUtils.h
         ${_INC_DIR}/input/defines/EventDefines.h
         ${_INC_DIR}/input/InputEvent.h
@@ -71,6 +73,7 @@ add_library(
         ${_SRC_DIR}/drawing/Rectangle.cpp
         ${_SRC_DIR}/drawing/WidgetAligner.cpp
         ${_SRC_DIR}/file/IniFileUtils.cpp
+        ${_SRC_DIR}/file/PpmFileHandler.cpp
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
         ${_SRC_DIR}/input/InputEvent.cpp
         ${_SRC_DIR}/time/Time.cpp
