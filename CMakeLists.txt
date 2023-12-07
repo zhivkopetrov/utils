@@ -49,9 +49,12 @@ add_library(
         ${_INC_DIR}/input/TouchEntity.h
         ${_INC_DIR}/input/TouchEntityInterface.h
         ${_INC_DIR}/time/Time.h
+        ${_INC_DIR}/time/LocalTime.h
         ${_INC_DIR}/ErrorCode.h
         ${_INC_DIR}/LimitValues.h
+        ${_INC_DIR}/LogBase.h
         ${_INC_DIR}/Log.h
+        ${_INC_DIR}/TimedLog.h
         ${_INC_DIR}/drawing/Point.h
         ${_INC_DIR}/drawing/Rectangle.h
         ${_INC_DIR}/drawing/Color.h
@@ -79,8 +82,9 @@ add_library(
         ${_SRC_DIR}/file_system/FileSystemUtils.cpp
         ${_SRC_DIR}/input/InputEvent.cpp
         ${_SRC_DIR}/time/Time.cpp
+        ${_SRC_DIR}/time/LocalTime.cpp
         ${_SRC_DIR}/rng/Rng.cpp
-        ${_SRC_DIR}/log/Log.cpp
+        ${_SRC_DIR}/log/LogBase.cpp
 )
 
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})

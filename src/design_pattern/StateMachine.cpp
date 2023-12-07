@@ -7,6 +7,7 @@
 
 // Own components headers
 #include "utils/Log.h"
+#include "utils/TimedLog.h"
 
 ErrorCode StateMachine::init(StateLogging status,
                              const std::vector<StateDescription>& states,

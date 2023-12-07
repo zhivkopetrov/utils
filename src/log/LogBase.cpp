@@ -1,5 +1,5 @@
 // Corresponding header
-#include "utils/Log.h"
+#include "utils/LogBase.h"
 
 // System headers
 #if defined _WIN32
