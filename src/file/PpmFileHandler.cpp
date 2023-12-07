@@ -6,7 +6,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 #include "utils/data_type/EnumClassUtils.h"
 
 namespace {

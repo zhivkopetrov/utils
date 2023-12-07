@@ -9,7 +9,7 @@
 
 // Own components headers
 #include "utils/ErrorCode.h"
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 
 ErrorCode StringUtils::extractIntsFromString(const std::string &data,
                                              const std::string &delimiters,

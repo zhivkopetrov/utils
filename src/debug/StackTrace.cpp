@@ -14,7 +14,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 
 void printStacktrace() {
 #if defined(_WIN32) || defined(_WIN64)

@@ -5,11 +5,12 @@
 #include <cinttypes>
 #include <cstdarg>
 #include <cstdio>
+#include <ctime>
 
 // Other libraries headers
 
 // Own components headers
-#include "utils/LogBase.h"
+#include "utils/log/LogBase.h"
 
 // Forward Declarations
 

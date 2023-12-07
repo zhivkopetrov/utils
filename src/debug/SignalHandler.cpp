@@ -9,7 +9,7 @@
 // Own components headers
 #include "utils/debug/StackTrace.h"
 #include "utils/ErrorCode.h"
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 
 void SignalHandler::installSignal(const int32_t signalNumber) {
   switch (signalNumber) {

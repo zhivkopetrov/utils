@@ -52,9 +52,9 @@ add_library(
         ${_INC_DIR}/time/LocalTime.h
         ${_INC_DIR}/ErrorCode.h
         ${_INC_DIR}/LimitValues.h
-        ${_INC_DIR}/LogBase.h
-        ${_INC_DIR}/Log.h
-        ${_INC_DIR}/TimedLog.h
+        ${_INC_DIR}/log/LogBase.h
+        ${_INC_DIR}/log/Log.h
+        ${_INC_DIR}/log/TimedLog.h
         ${_INC_DIR}/drawing/Point.h
         ${_INC_DIR}/drawing/Rectangle.h
         ${_INC_DIR}/drawing/Color.h

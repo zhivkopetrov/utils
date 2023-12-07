@@ -10,7 +10,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "utils/LogBase.h"
+#include "utils/log/LogBase.h"
 #include "utils/time/LocalTime.h"
 
 // Forward Declarations

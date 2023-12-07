@@ -9,7 +9,7 @@
 
 // Own components headers
 #include "utils/ErrorCode.h"
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 
 CircularBuffer::CircularBuffer()
     : _buf(nullptr), _capacity(0), _readIndex(0), _writeIndex(0) {}

@@ -6,7 +6,7 @@
 // Other libraries headers
 
 // Own components headers
-#include "utils/Log.h"
+#include "utils/log/Log.h"
 
 namespace {
 uint32_t computeMaxWorkerThreads(uint32_t workersCount) {
