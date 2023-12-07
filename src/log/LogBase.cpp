@@ -3,6 +3,8 @@
 
 // System headers
 #if defined _WIN32
+// Include only a subset of windows
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #endif
 
