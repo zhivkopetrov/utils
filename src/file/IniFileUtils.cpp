@@ -63,6 +63,17 @@ bool parseValueInt(const std::string &keyStr, int32_t &outValue) {
   return true;
 }
 
+bool parseValueUint(const std::string &keyStr, uint32_t &outValue) {
+  try {
+    outValue = static_cast<uint32_t>(std::stoul(keyStr));
+  } catch (const std::exception &e) {
+    LOGERR("%s", e.what());
+    return false;
+  }
+
+  return true;
+}
+
 bool parseValueFloat(const std::string &keyStr, float &outValue) {
   try {
     outValue = std::stof(keyStr);
@@ -167,6 +178,18 @@ bool IniFileUtils::getKeyValueInt(const IniFileSection &section,
   }
 
   return parseValueInt(it->second, outValue);
+}
+
+bool IniFileUtils::getKeyValueUint(const IniFileSection &section,
+                                   const std::string &identifier,
+                                   uint32_t &outValue) {
+  auto it = section.find(identifier);
+  if (it == section.end()) {
+    LOGERR("Error, key: '%s' not found", identifier.c_str());
+    return false;
+  }
+
+  return parseValueUint(it->second, outValue);
 }
 
 bool IniFileUtils::getKeyValueFloat(const IniFileSection &section,

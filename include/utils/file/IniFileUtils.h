@@ -29,6 +29,9 @@ public:
   static bool getKeyValueInt(const IniFileSection &section,
                              const std::string &identifier, int32_t &outValue);
 
+  static bool getKeyValueUint(const IniFileSection &section,
+                              const std::string &identifier, uint32_t &outValue);
+
   static bool getKeyValueFloat(const IniFileSection &section,
                                const std::string &identifier, float &outValue);
 
