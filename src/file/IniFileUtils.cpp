@@ -8,6 +8,7 @@
 // Other libraries headers
 
 // Own components headers
+#include "utils/debug/StrError.h"
 #include "utils/log/Log.h"
 
 namespace {
@@ -19,7 +20,8 @@ ErrorCode validate(std::string_view file, std::ifstream &outStream) {
 
   outStream.open(file.data(), std::ios_base::in | std::ios_base::binary);
   if (!outStream) {
-    LOGERR("Error, file: [%s] could not be opened", file.data());
+    LOGERR("Error, file: [%s] could not be opened. Reason: %s",
+      file.data(), strError().c_str());
     return ErrorCode::FAILURE;
   }
 
