@@ -2,6 +2,7 @@
 #define UTILS_INIFILEUTILS_H_
 
 // System headers
+#include <cstdint>
 #include <string>
 #include <string_view>
 #include <unordered_map>
