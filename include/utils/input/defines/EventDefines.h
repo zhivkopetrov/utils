@@ -54,6 +54,7 @@ enum EventDataTypes {
   WINDOW = 512,      // SDL_WINDOWEVENT        /* Window state change */
   TEXT_INPUT = 771,  // SDL_TEXTINPUT      /* Keyboard text input */
   OS_LANGUAGE_CHANGED = 772,  // SDL_KEYMAPCHANGED
+  CLIPBOARD_UPDATE = 2304, // SDL_CLIPBOARDUPDATE
 
   AUDIO_DEVICE_ADDED = 4352  // SDL_AUDIODEVICEADDED
 };
