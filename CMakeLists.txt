@@ -120,7 +120,7 @@ if(NOT DISABLE_ROS_TOOLING)
 endif()
 
 # detect projects that have not defined cmake_helpers_DIR in their root CMakeLists.txt
-if (NOT cmake_helpers_DIR)
+if (NOT ${cmake_helpers_DIR})
     include(cmake_helpers/helpers.cmake)
 endif()
 
