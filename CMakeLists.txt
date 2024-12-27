@@ -105,8 +105,6 @@ if(NOT EMSCRIPTEN)
     )
 endif()
 
-
-
 if(NOT DISABLE_ROS_TOOLING)
     # Ament uses non-monolith build (separate build and install steps).
     # The helpers.cmake has to be included manually.
@@ -119,6 +117,11 @@ if(NOT DISABLE_ROS_TOOLING)
         ${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/package.xml
     )
+endif()
+
+# detect projects that have not defined cmake_helpers_DIR in their root CMakeLists.txt
+if (NOT cmake_helpers_DIR)
+    include(cmake_helpers/helpers.cmake)
 endif()
 
 set_target_cpp_standard(${PROJECT_NAME} 20)
